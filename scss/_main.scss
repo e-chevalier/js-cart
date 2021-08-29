@@ -150,7 +150,7 @@ body::-webkit-scrollbar-thumb {
  .footer{
     font-family: $font-cabin;
     background-color: $main-bg-color;
-    color: $main-font-color;
+    color: $main-font-color-light;
     p{
         margin: 0;
         padding: 0;
@@ -163,9 +163,9 @@ body::-webkit-scrollbar-thumb {
 
 .footer__socialMedia{
     background-color: $color-darkviolet;
-    color: $main-font-color;
+    color: $main-font-color-light;
     a{
-        color: $main-font-color;
+        color: $main-font-color-light;
         &:hover{
             color: $color-hover;
         }
@@ -174,14 +174,14 @@ body::-webkit-scrollbar-thumb {
 
 .footer__address{
     background-color: $color-darkviolet;
-    color: $main-font-color;
+    color: $main-font-color-light;
     font-size: 1rem;
 }
 
 .footer__goUp{
     background-color: $main-bg-color;
     a{
-        color:$main-font-color;
+        color:$main-font-color-light;
         &:hover{
             color:$color-hover;
         }

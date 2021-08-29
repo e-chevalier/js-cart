@@ -333,7 +333,7 @@ body::-webkit-scrollbar-thumb {
 .footer {
   font-family: "Cabin", sans-serif;
   background-color: #2a5228;
-  color: black;
+  color: #FAFAFA;
 }
 
 .footer p {
@@ -347,11 +347,11 @@ body::-webkit-scrollbar-thumb {
 
 .footer__socialMedia {
   background-color: #011a22;
-  color: black;
+  color: #FAFAFA;
 }
 
 .footer__socialMedia a {
-  color: black;
+  color: #FAFAFA;
 }
 
 .footer__socialMedia a:hover {
@@ -360,7 +360,7 @@ body::-webkit-scrollbar-thumb {
 
 .footer__address {
   background-color: #011a22;
-  color: black;
+  color: #FAFAFA;
   font-size: 1rem;
 }
 
@@ -369,7 +369,7 @@ body::-webkit-scrollbar-thumb {
 }
 
 .footer__goUp a {
-  color: black;
+  color: #FAFAFA;
 }
 
 .footer__goUp a:hover {
