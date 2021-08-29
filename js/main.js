@@ -151,7 +151,7 @@ window.emptyCart = function emptyCart() {
     setCartCounter(cart.cartSize());
     catalogue.forEach(prod => {
         setStockCounter(prod.id); 
-        updateProdQty(prodId);
+        updateProdQty(prod.id);
     });
     makeCartContent();
     infoCart(cart);
