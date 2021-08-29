@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="./assets/Awesome/css/all.min.css" rel="stylesheet">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="./css/animate.min.css">
+    <link rel="stylesheet" href="/css/sass-style.min.css">
+    <title>Clase 4 js Coder</title>
+</head>
+
+<body>
+    <div class="container-fluid p-0">
+		<!-- HEADER -->
+		<nav class="navbar navbar-expand-lg navbar-custom">
+			<div class="d-flex w-25 order-0">
+				<a class="navbar-brand navbar-custom__brand" href="./index.html">
+					<img class="wow animate__animated animate__zoomIn animate__faster animate__delay-1s"
+						src="assets/icons/logo_small.png" alt="Mi Logo">
+				</a>
+			</div>
+			<div class="navbar-collapse collapse justify-content-center order-2 order-lg-1 navbar-custom__link navbar-custom__link--colorPink"
+				id="collapsingNavbar">
+				<ul class="navbar-nav mt-2 mt-lg-0">
+					<li class="nav-item">
+						<a class="nav-link" href="#">Verduras</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="#">Frutas</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="#">Carnes</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="#">Lacteos</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="#">Fiambres</a>
+					</li>
+				</ul>
+			</div>
+			<div class="navbar-text w-25 text-right order-1">
+				<a name="emptyCart" id="emptyCart" onclick="emptyCart();return false;" class="btn btn-danger" href="#" role="button">
+					<i class="fas fa-trash-restore"></i>
+				</a>
+				<a name="emptyCart" id="emptyCart" onclick="emptyCart();return false;" class="btn btn-light" href="#" role="button">
+					<span class="fa-layers fa-fw">
+						<i class="fas fa-shopping-cart"></i>
+						<span id="cartCounter" class="badge badge-success"></span>
+					</span>
+				</a>
+				<button class="navbar-toggler navbar-custom__toogler" type="button" data-toggle="collapse"
+					data-target="#collapsingNavbar" aria-controls="MyMenu" aria-expanded="false"
+					aria-label="Toggle navigation">
+					<i class="fas fa-bars"></i>
+				</button>
+			</div>
+		</nav><!-- HEADER END -->
+	</div>
+
+
+    <div id="cardDeckMQ">
+        <div id="cards" class="container ">
+           
+        </div>
+    </div>
+    <!-- FOOTER -->
+	<footer class="footer container-fluid  mx-auto w-100 px-0 text-center">
+
+		<div class="d-flex flex-column flex-md-row">
+
+			<div class="footer__address container col-12 col-md-4 col-lg-4 p-4">
+				<div>
+					<address>
+						<p class="font-weight-bold mb-3">ESTAMOS EN</p>
+						<p> Av. Cnel. Marcelino E. Freyre </p>
+						<p> Buenos Aires </p>
+						<p>Tel: +541147781500</p>
+					</address>
+				</div>
+			</div>
+
+			<div class="footer__socialMedia container col-12 col-md-4 col-lg-4 p-4">
+				<p class="font-weight-bold mb-3">SEGUINOS</p>
+				<nav>
+					<ul class="list-inline p-2">
+						<li class="list-inline-item"><a href="https://es-la.facebook.com/" target="_blank"
+								rel="noopener noreferrer">
+								<i class="fab fa-facebook fa-2x "></i></a></li>
+						<li class="list-inline-item"><a href="https://twitter.com/argentina" target="_blank"
+								rel="noopener noreferrer">
+								<i class="fab fa-twitter fa-2x "></i></a></li>
+						<li class="list-inline-item"><a href="https://www.instagram.com/?hl=es-la" target="_blank"
+								rel="noopener noreferrer">
+								<i class="fab fa-instagram fa-2x "></i></a></li>
+						<li class="list-inline-item"><a
+								href="https://api.whatsapp.com/send/?phone=5493513512412907&amp;text&amp;app_absent=0"
+								target="_blank" rel="noopener noreferrer">
+								<i class="fab fa-whatsapp fa-2x "></i></a></li>
+					</ul>
+				</nav>
+			</div>
+
+			<div class="footer__schedule container col-12 col-md-4 col-lg-4 p-4">
+				<div>
+					<p class="font-weight-bold mb-3">HORARIOS</p>
+					<p>Lunes a Sábados</p>
+					<p>09:00 - 19:30</p>
+					<p>Domingos</p>
+					<p>Cerrado</p>
+				</div>
+			</div>
+
+		</div>
+		<div class="footer__goUp container col-12 col-md-12 col-lg-12">
+			<div>
+				<div><a href="#"><i class="fas fa-angle-double-up fa-2x p-3"></i></a></div>
+				<p class="text-secondary">&#169; 2021 TTLG. ALL RIGHTS RESERVED. DESIGN FROM TTLG &#174;</p>
+			</div>
+		</div>
+	</footer><!-- FOOTER END -->
+
+
+
+    <script src="js/wow.min.js"></script>
+	<script>
+		new WOW().init();
+	</script>
+    <script type="module" src="/js/main.js"></script>
+    <script src="/bootstrap/js/jquery-3.5.1.slim.min.js"></script>
+    <script src="/bootstrap/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
