@@ -230,31 +230,41 @@ main();
  catalogue.forEach( (prod, i) => {
  
      if ((i % 4) == 0 ) { // INSERT CARDDECK INIT
-         cardContent +=`<div class="card-deck my-5">`;
+         cardContent +=`<div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">`;
      }
      cardContent +=`
-     <div class="card border-0 my-3">
-         <img class="card-img-top" src="/assets/img/product/${prod.id}.jpg" alt="">
-         <div class="card-body font-black">
-             <h4 class="card-title">${prod.name}</h4>
-             <p class="card-text">Contenido: ${prod.weight} Kg</p>
-             <p class="">$${prod.price}</p>
-             <p> 
-                 <button class="btn btn-light" type="button" data-toggle="collapse" data-target="#collapseProd${i}" aria-expanded="false" aria-controls="collapseProd${i}">
-                 Mas información
-                 </button>
-             </p>
-             <div class="collapse" id="collapseProd${i}">
-                 <div class="card-text">${prod.description}</div>
-             </div>
-         </div>
-         <div class="card-footer">
-             <div class="d-flex flex-row justify-content-around">
-                 <button type="button" name="" id="plus" onclick="addToCart('${prod.id}');return false;" class="btn btn-light btn-lg rounded-circle"><i class="fas fa-plus"></i></button>
-                 <div> <span id="stock-${prod.id}" class="badge badge-light">Stock ${prod.stock} Kg</span> </div>
-                 <button type="button" name="" id="minus" onclick="takeOutOfCart('${prod.id}');return false;" class="btn btn-light btn-lg rounded-circle"><i class="fas fa-minus"></i></button>
-             </div>
-         </div>
+     <div class="col">
+        <div class="card border-0 my-3">
+            <img class="card-img-top" src="/assets/img/product/${prod.id}.jpg" alt="">
+            <div class="card-body font-black">
+                <h4 class="card-title">${prod.name}</h4>
+                <p class="card-text">Contenido: ${prod.weight} Kg</p>
+                <p class="">$${prod.price}</p>
+                <p>
+                <button class="btn btn-light text-dark" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-${i}" aria-expanded="false" aria-controls="collapse-${i}">
+                    Mas información
+                </button>
+                </p>
+                <div>
+                    <div class="collapse" id="collapse-${i}">
+                        <div class="card-text">
+                         ${prod.description}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <div class="d-flex flex-row justify-content-around align-items-center">
+                    <button type="button" class="btn btn-outline-success rounded-circle" onclick="addToCart('${prod.id}');return false;">
+                        <i class="fas fa-plus"></i>
+                    </button>
+                    <div> <span id="stock-${prod.id}" class="badge bg-light text-success">Stock ${prod.stock} Kg</span> </div>
+                    <button type="button" class="btn btn-outline-danger rounded-circle" onclick="takeOutOfCart('${prod.id}');return false;">
+                        <i class="fas fa-minus"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
      </div>
      `;
      if ((i%4) == 3) { // INSERT CARDDECK CLOSE
