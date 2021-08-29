@@ -41,6 +41,10 @@ class Cart {
         return this.#_shoopingList;
     }
 
+    get shipping() {
+        return this.#_shipping;
+    }
+
     cartSize(){
         return this.#_shoopingList.length;
     }
