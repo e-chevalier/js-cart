@@ -249,7 +249,7 @@ const makeCardDeck = () => {
                 <div class="card-body font-black">
                     <h4 class="card-title">${prod.name}</h4>
                     <p class="card-text">Contenido: ${prod.weight} Kg</p>
-                    <p class="">$${prod.price}</p>
+                    <p class="fw-bold">$${prod.price}</p>
                     <p>
                         <button class="btn btn-light text-dark" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-${i}" aria-expanded="false" aria-controls="collapse-${i}">
                             Mas información
@@ -317,9 +317,9 @@ const makeCartContent = () => {
 							<div class="card-body">
 								<h5 class="card-title">${prod.name}</h5>
 								<p class="card-text">
-									<p>Precio por kg : $${prod.price}<br>
-									Cantidad solicitada: ${qty} kg <br>
-									<span class="fw-normal">Subtotal : $${qty * prod.price}</span> <br>
+									<p>Precio por kg : $${prod.price}</p>
+									<p>Cantidad solicitada: <span class="fw-bold">${qty} kg</span></p>
+									<p><span class="fw-bold">Subtotal : $${qty * prod.price}</span></p>
 								</p>
 							</div>
 						</div>
@@ -327,15 +327,13 @@ const makeCartContent = () => {
 					<div class="row g-0">
 						<p class="card-text">
 						<div class="d-flex flex-row justify-content-around align-items-center">
-							<button type="button" class="btn btn-outline-success rounded-circle"
-								onclick="addToCart('${prod.id}');return false;">
-								<i class="fas fa-plus"></i>
-							</button>
+                            <button type="button" class="btn btn-outline-danger rounded-circle" onclick="takeOutOfCart('${prod.id}');return false;">
+                                <i class="fas fa-minus"></i>
+                            </button>
 							<div> <span id="stock-${prod.id}" class="badge bg-light text-success">Stock ${prod.stock} Kg</span>
 							</div>
-							<button type="button" class="btn btn-outline-danger rounded-circle"
-								onclick="takeOutOfCart('${prod.id}');return false;">
-								<i class="fas fa-minus"></i>
+                            <button type="button" class="btn btn-outline-success rounded-circle" onclick="addToCart('${prod.id}');return false;">
+								<i class="fas fa-plus"></i>
 							</button>
 						</div>
 						</p>
