@@ -23,10 +23,6 @@
 						src="assets/icons/logo_small.png" alt="Mi Logo">
 				</a>
 				<div class="navbar-text d-flex justify-content-between text-right order-1 px-md-4">
-					<a name="emptyCart" id="emptyCart" onclick="emptyCart();return false;"
-						class="btn btn-danger text-light" href="#" role="button">
-						<i class="fas fa-trash-restore"></i>
-					</a>
 					<a name="Cart" id="Cart" onclick="makeCartContent();return false;"
 						class="btn btn-light position-relative" data-bs-toggle="offcanvas" href="#offcanvasExample"
 						role="button" aria-controls="offcanvasExample">
@@ -87,22 +83,30 @@
 		</div>
 		<div class="offcanvas-body">
 			<div class="d-grid gap-2 col-12 mx-auto mb-4">
-				<button class="btn btn-outline-success"  disabled type="button">
-					Iniciar Pago
+				<button id="total" class="btn btn-info" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTotal"	aria-expanded="false" aria-controls="collapseTotal">	
 				</button>
-				<button id="total" class="btn btn-outline-info" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTotal"
-					aria-expanded="false" aria-controls="collapseTotal">
-					
-				</button>	
 				<div class="collapse collapse-horizontal" id="collapseTotal">
 					<div class="card card-body border-0" style="width: 350px;">
 						<p id="subtotal" class="h6"> </p>
 						<p id="envio" class="h6"></p>
 					</div>
 				</div>
+				<button class="btn btn-success"  disabled type="button">
+					INICIAR PAGO
+				</button>
+				<button  type="button" class="btn btn-warning text-reset" data-bs-dismiss="offcanvas" aria-label="Close">
+					SEGUIR COMPRANDO
+				</button>
 			</div>
 			<div id="cartContent">
 				<!-- CONTENIDO GENERADO DE MANERA DINAMICA DESDE JS -->
+			</div>
+			<div class="d-grid gap-1 col-12 mx-auto mb-4">
+				<button type="button" id="emptyCart" onclick="emptyCart();return false;" class="btn btn-outline-secondary">
+					<i class="fas fa-trash-restore">
+						<span class="roboto-regular">Vaciar Carrito</span>
+					</i>
+				</button>
 			</div>
 		</div>
 	</div>

@@ -214,7 +214,7 @@ const updateProdQty = (prodId) => {
     const myShoopingList = cart.shoopingList;
     let qty = myShoopingList.filter(prod => prod.id === prodId).length;
     if (qty > 0) {
-        document.getElementById('prodQty-'+prodId).innerHTML = qty;
+        document.getElementById('prodQty-'+prodId).innerHTML = qty + 'Kg';
         document.getElementById('prodQty-'+prodId).style.visibility = "visible";
     } else {
         document.getElementById('prodQty-'+prodId).style.visibility = "hidden";
@@ -265,16 +265,16 @@ const makeCardDeck = () => {
                 </div>
                 <div class="card-footer">
                     <div class="d-flex flex-row justify-content-around align-items-center">
-                        <button type="button" class="btn btn-outline-success rounded-circle" onclick="addToCart('${prod.id}');return false;">
-                            <i class="fas fa-plus"></i>
-                        </button>
-                        <div> <span id="stock-${prod.id}" class="badge bg-light text-success">Stock ${prod.stock} Kg</span> </div>
                         <button type="button" class="btn btn-outline-danger rounded-circle" onclick="takeOutOfCart('${prod.id}');return false;">
                             <i class="fas fa-minus"></i>
                         </button>
+                        <div> <span id="prodQty-${prod.id}" class="badge bg-light text-success fs-6"></span> </div>
+                        <button type="button" class="btn btn-outline-success rounded-circle" onclick="addToCart('${prod.id}');return false;">
+                            <i class="fas fa-plus"></i>
+                        </button>
                     </div>
                 </div>
-                <span id="prodQty-${prod.id}" class="position-absolute top-0 start-100 translate-middle fs-6 badge rounded-pill bg-success">+99</span>
+                <span id="stock-${prod.id}" class="position-absolute top-0 start-50 translate-middle fs-6 badge rounded-pill bg-secondary"> Stock ${prod.stock} Kg</span>
             </div>
         </div>
         `;
@@ -285,7 +285,7 @@ const makeCardDeck = () => {
 
     document.getElementById('cards').innerHTML = cardContent;
 
-    catalogue.forEach((prod, i) => {
+    catalogue.forEach((prod) => {
         updateProdQty(prod.id);
     });
 }
