@@ -190,56 +190,6 @@ window.emptyCart = function emptyCart() {
     
 }
 
-/**
- * ----------------------------------------
- * Método para solicitar la cantidad que desea comprar de un articulo un cliente.
- * El valor ingresado debe ser mayor o igual a 0.
- * ----------------------------------------
- */
-
-const amountOf = (item, price, stock) => {
-
-    let res = "NaN";
-
-    while (res.toString() == "NaN" || res < 0 || res > stock) {
-        res = Number(prompt(`Puede comprar ${item} a $${price} el kg. ¿Cuantos kilos desea? (Stock: ${stock})`));
-        if (res.toString() !== "NaN" && res >= 0 && res <= stock) {
-            break;
-        } else {
-            alert("El valor ingresado debe ser mayor o igual a 0. y menor al stock");
-        }
-    }
-
-    return res;
-}
-
-
-/**
- * ----------------------------------------
- * Método que recoge todas las cantidades que desea el cliente de cada producto de catalogue.
- * Input - Array de productos.
- * El Método retorna un MAP de articulo cantidad que desea el cliente. (prod.id : qty)
- * ----------------------------------------
- */
-
-const makeShoppingList = catalogue => {
-    const shoppingMap = new Map();
-
-    catalogue.forEach(prod => shoppingMap.set(prod.id, amountOf(prod.name, prod.price, prod.stock)));
-
-    return shoppingMap;
-}
-
-
-
-const addProd2Cart = shoppingMap => {
-    for (const [prodId, qty] of shoppingMap.entries()) {
-        for (let i = 0; i < qty; i++) {
-            cart.addItem(prodId);
-        }
-    }
-}
-
 
 /**
  * ----------------------------------------
@@ -399,10 +349,6 @@ const main = () => {
     initCart();
     makeCardDeck();
     makeCartContent();
-    /*const list = makeShoppingList(catalogue);
-    console.log(list);
-    addProd2Cart(list);
-    infoCart(cart);*/
 }
 
 main();
