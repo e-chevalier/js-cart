@@ -108,9 +108,10 @@ const setAddButtonCardVisibility = (prodId) => {
     let id = 'addButtonCart-'+prodId;
     let actualStock = catalogue.find(prod => prod.id == prodId).stock;
 
-    if (actualStock == 0 ){
+    if (actualStock == 0 && document.getElementById(id)){
         document.getElementById(id).style.visibility = "hidden";  
-    } else {
+    }
+    if (actualStock > 0 && document.getElementById(id)){
         document.getElementById(id).style.visibility = "visible";
     }
 }
@@ -224,47 +225,58 @@ const updateProdQty = (prodId) => {
 const makeCardDeck = () => {
     let cardContent = ``;
 
-    
-
     catalogue.forEach((prod, i) => {
 
         if ((i % 4) == 0) { // INSERT CARDDECK INIT
             cardContent += `<div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">`;
         }
         cardContent += `
-        <div class="col">
-            <div class="card border-0 m-3 position-relative">
-                <img class="card-img-top" src="/assets/img/product/${prod.id}.jpg" alt="">
-                <div class="card-body font-black">
-                    <h4 class="card-title">${prod.name}</h4>
-                    <p class="card-text">Contenido: ${prod.weight} Kg</p>
-                    <p class="fw-bold">$${prod.price}</p>
-                    <p>
-                        <button class="btn btn-light text-dark" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-${i}" aria-expanded="false" aria-controls="collapse-${i}">
-                            Mas información
-                        </button>
-                    </p>
-                    <div>
-                        <div class="collapse" id="collapse-${i}">
-                            <div class="card-text">
-                            ${prod.description}
-                            </div>
+        <div class="col p-3">
+            <div class="card h-100 text-center">
+                <div class="row h-100 g-0 pt-3">
+                    <div class="col-5">
+                        <img class="card-img-top" src="/assets/img/product/${prod.id}.jpg" alt="">
+                    </div>
+                    <div class="col-7">
+                        <div class="card-body font-black">
+                            <h4 class="card-title">${prod.name}</h4>
+                            <p class="card-text">Contenido: ${prod.weight} Kg</p>
+                            <p class="fw-bold">$${prod.price}</p>
+                           
                         </div>
                     </div>
                 </div>
-                <div class="card-footer">
-                    <div class="d-flex flex-row justify-content-around align-items-center">
-                        <button id="takeoutButton-${prod.id}" type="button" class="btn btn-outline-danger rounded-circle" onclick="takeOutOfCart('${prod.id}');return false;">
-                            <i class="fas fa-minus"></i>
-                        </button>
-                        <div> <span id="prodQty-${prod.id}" class="badge bg-light text-success fs-6"></span> </div>
-                        <button id="addButton-${prod.id}" type="button" class="btn btn-outline-success rounded-circle" onclick="addToCart('${prod.id}');return false;">
-                            <i class="fas fa-plus"></i>
-                        </button>
+                <div class="row g-0">
+                    <div class="card-footer">
+                        <p>
+                            <button class="btn btn-light text-dark" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapse-${i}" aria-expanded="false" aria-controls="collapse-${i}">
+                                Mas información
+                            </button>
+                            <div class="collapse" id="collapse-${i}">
+                                <div class="card-text px-4">${prod.description} </div>
+                            </div>
+                        </p>
+                        
+                        <div class="d-flex flex-row justify-content-around align-items-center">
+                            <button id="takeoutButton-${prod.id}" type="button"
+                                class="btn btn-outline-danger rounded-circle"
+                                onclick="takeOutOfCart('${prod.id}');return false;">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                            <div> <span id="prodQty-${prod.id}" class="badge bg-light text-success fs-6"></span> </div>
+                            <button id="addButton-${prod.id}" type="button" class="btn btn-outline-success rounded-circle"
+                                onclick="addToCart('${prod.id}');return false;">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                        </div>
                     </div>
+                    <span id="stock-${prod.id}"
+                        class="position-absolute top-0 start-50 w-50 translate-middle fs-6 badge rounded-pill bg-secondary">
+                        Stock ${prod.stock} Kg</span>
                 </div>
-                <span id="stock-${prod.id}" class="position-absolute top-0 start-50 translate-middle fs-6 badge rounded-pill bg-secondary"> Stock ${prod.stock} Kg</span>
-            </div>
+               
+	        </div>
         </div>
         `;
         if ((i % 4) == 3) { // INSERT CARDDECK CLOSE
