@@ -84,6 +84,35 @@ const setStockCounter = (prodId) => {
     let id = 'stock-' + prodId;
     let actualStock = catalogue.find(prod => prod.id == prodId).stock;
     document.getElementById(id).innerHTML = 'Stock ' + actualStock + ' Kg';
+   
+    // stock badge is red and stock > 0
+    if (actualStock > 0 && document.getElementById(id).classList.contains('bg-danger')) {
+        document.getElementById(id).classList.replace('bg-danger', 'bg-secondary');
+        document.getElementById('addButton-'+prodId).style.visibility = "visible";     
+    }
+
+    // stock is 0 and badge is gray 
+    if (actualStock == 0 && document.getElementById(id).classList.contains('bg-secondary')) {
+        document.getElementById(id).classList.replace('bg-secondary', 'bg-danger');
+        document.getElementById('addButton-'+prodId).style.visibility = "hidden";
+    } 
+}
+
+/**
+ * ----------------------------------------
+ * Método para modificar la visibilidad del boton add en el carrito.
+ * ----------------------------------------
+ */
+
+const setAddButtonCardVisibility = (prodId) => {
+    let id = 'addButtonCart-'+prodId;
+    let actualStock = catalogue.find(prod => prod.id == prodId).stock;
+
+    if (actualStock == 0 ){
+        document.getElementById(id).style.visibility = "hidden";  
+    } else {
+        document.getElementById(id).style.visibility = "visible";
+    }
 }
 
 /**
@@ -113,13 +142,16 @@ const initCart = () => {
 
 window.addToCart = function addToCart(prodId) {
 
-    cart.addItem(prodId);
-    localStorage.setItem('cart', JSON.stringify(cart.stringify()));
-    setCartCounter(cart.cartSize());
-    setStockCounter(prodId);
-    updateProdQty(prodId);
-    makeCartContent();
-    infoCart(cart);
+    if( cart.addItem(prodId) ) { // there is stock
+        localStorage.setItem('cart', JSON.stringify(cart.stringify()));
+        setCartCounter(cart.cartSize());
+        setStockCounter(prodId);
+        updateProdQty(prodId);
+        makeCartContent();
+        infoCart(cart);
+    } else {
+        alert("NO HAY STOCK DE ESE PRODUCTO");  
+    }
 }
 
 
@@ -209,6 +241,13 @@ const addProd2Cart = shoppingMap => {
 }
 
 
+/**
+ * ----------------------------------------
+ * Método para actualizar el contador de KG que el usuario selecciono
+ * en base a los productos que tiene en el carrito.
+ * ----------------------------------------
+ */
+
 const updateProdQty = (prodId) => {
 
     const myShoopingList = cart.shoopingList;
@@ -265,11 +304,11 @@ const makeCardDeck = () => {
                 </div>
                 <div class="card-footer">
                     <div class="d-flex flex-row justify-content-around align-items-center">
-                        <button type="button" class="btn btn-outline-danger rounded-circle" onclick="takeOutOfCart('${prod.id}');return false;">
+                        <button id="takeoutButton-${prod.id}" type="button" class="btn btn-outline-danger rounded-circle" onclick="takeOutOfCart('${prod.id}');return false;">
                             <i class="fas fa-minus"></i>
                         </button>
                         <div> <span id="prodQty-${prod.id}" class="badge bg-light text-success fs-6"></span> </div>
-                        <button type="button" class="btn btn-outline-success rounded-circle" onclick="addToCart('${prod.id}');return false;">
+                        <button id="addButton-${prod.id}" type="button" class="btn btn-outline-success rounded-circle" onclick="addToCart('${prod.id}');return false;">
                             <i class="fas fa-plus"></i>
                         </button>
                     </div>
@@ -287,11 +326,9 @@ const makeCardDeck = () => {
 
     catalogue.forEach((prod) => {
         updateProdQty(prod.id);
+        setStockCounter(prod.id);
     });
 }
-
-
-
 
 
 
@@ -327,12 +364,12 @@ const makeCartContent = () => {
 					<div class="row g-0">
 						<p class="card-text">
 						<div class="d-flex flex-row justify-content-around align-items-center">
-                            <button type="button" class="btn btn-outline-danger rounded-circle" onclick="takeOutOfCart('${prod.id}');return false;">
+                            <button id="takeoutButtonCart-${prod.id}" type="button" class="btn btn-outline-danger rounded-circle" onclick="takeOutOfCart('${prod.id}');return false;">
                                 <i class="fas fa-minus"></i>
                             </button>
-							<div> <span id="stock-${prod.id}" class="badge bg-light text-success">Stock ${prod.stock} Kg</span>
+							<div> <span class="badge bg-light text-success">Stock ${prod.stock} Kg</span>
 							</div>
-                            <button type="button" class="btn btn-outline-success rounded-circle" onclick="addToCart('${prod.id}');return false;">
+                            <button id="addButtonCart-${prod.id}" type="button" class="btn btn-outline-success rounded-circle" onclick="addToCart('${prod.id}');return false;">
 								<i class="fas fa-plus"></i>
 							</button>
 						</div>
@@ -345,6 +382,9 @@ const makeCartContent = () => {
 
     document.getElementById('cartContent').innerHTML = cartContent;
 
+    catalogue.forEach((prod) => {
+        setAddButtonCardVisibility(prod.id); 
+    });
 }
 
 window.makeCartContent = () => makeCartContent();

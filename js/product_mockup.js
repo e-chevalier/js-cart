@@ -9,7 +9,7 @@ let naranja_params = {
     weight: 1, //kg
     discount: 0, //%
     type: 'fruit',
-    stock: 100 //kg
+    stock: 5 //kg
 }
 
 let manzana_params = {
@@ -20,7 +20,7 @@ let manzana_params = {
     weight: 1,
     discount: 10,
     type: 'fruit',
-    stock: 100 //kg
+    stock: 6 //kg
 }
 
 let pera_params = {

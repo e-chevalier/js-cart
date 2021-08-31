@@ -62,7 +62,7 @@ class Cart {
             this.#_total += prod.price 
             this.isEnable();
             status = true;
-        } else {
+        } else { // STOCK 0
             console.log(`No queda stock de ${prod.name}.`);
         }
         return status;
