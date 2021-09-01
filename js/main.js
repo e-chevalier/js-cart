@@ -264,7 +264,7 @@ const makeCardDeck = () => {
                                 onclick="takeOutOfCart('${prod.id}');return false;">
                                 <i class="fas fa-minus fa-2x"></i>
                             </button>
-                            <div> <span id="prodQty-${prod.id}" class="badge bg-light text-success fs-5"></span> </div>
+                            <div> <span id="prodQty-${prod.id}" class="badge bg-light text-success fs-6"></span> </div>
                             <button id="addButton-${prod.id}" type="button" 
                                 class="btn btn-outline-success rounded-circle border-0"
                                 onclick="addToCart('${prod.id}');return false;">
@@ -327,13 +327,13 @@ const makeCartContent = () => {
 					<div class="row g-0">
 						<p class="card-text">
 						<div class="d-flex flex-row justify-content-around align-items-center">
-                            <button id="takeoutButtonCart-${prod.id}" type="button" class="btn btn-outline-danger rounded-circle" onclick="takeOutOfCart('${prod.id}');return false;">
-                                <i class="fas fa-minus"></i>
+                            <button id="takeoutButtonCart-${prod.id}" type="button" class="btn btn-outline-danger rounded-circle border-0" onclick="takeOutOfCart('${prod.id}');return false;">
+                                <i class="fas fa-minus fa-2x"></i>
                             </button>
-							<div> <span class="badge bg-light text-success">Stock ${prod.stock} Kg</span>
+							<div> <span class="badge bg-light text-success fs-6">Stock ${prod.stock} Kg</span>
 							</div>
-                            <button id="addButtonCart-${prod.id}" type="button" class="btn btn-outline-success rounded-circle" onclick="addToCart('${prod.id}');return false;">
-								<i class="fas fa-plus"></i>
+                            <button id="addButtonCart-${prod.id}" type="button" class="btn btn-outline-success rounded-circle border-0" onclick="addToCart('${prod.id}');return false;">
+								<i class="fas fa-plus fa-2x"></i>
 							</button>
 						</div>
 						</p>
