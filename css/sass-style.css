@@ -202,7 +202,7 @@ body {
   font-weight: 300;
   font-size: 1rem;
   font-family: "Roboto", sans-serif;
-  background-color: #2a5228;
+  background-color: #198755;
   scrollbar-width: thin;
   scrollbar-color: #2a5228 #011a22;
 }
@@ -299,7 +299,7 @@ body::-webkit-scrollbar-thumb {
  */
 /* Change background color */
 .navbar-custom {
-  background-color: #2a5228;
+  background-color: #198755;
   color: black;
   font-family: "Cabin", sans-serif;
 }
@@ -332,7 +332,7 @@ body::-webkit-scrollbar-thumb {
  */
 .footer {
   font-family: "Cabin", sans-serif;
-  background-color: #2a5228;
+  background-color: #198755;
   color: #FAFAFA;
 }
 
@@ -365,7 +365,7 @@ body::-webkit-scrollbar-thumb {
 }
 
 .footer__goUp {
-  background-color: #2a5228;
+  background-color: #198755;
 }
 
 .footer__goUp a {
@@ -381,7 +381,7 @@ body::-webkit-scrollbar-thumb {
 }
 
 .footer--bgDark {
-  background-color: #2a5228;
+  background-color: #198755;
 }
 
 .footer--bgGray {

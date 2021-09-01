@@ -241,7 +241,7 @@ const makeCardDeck = () => {
                         <div class="card-body font-black">
                             <h4 class="card-title">${prod.name}</h4>
                             <p class="card-text">Contenido: ${prod.weight} Kg</p>
-                            <p class="fw-bold">$${prod.price}</p>
+                            <p class="fw-bold fs-4">$${prod.price} Kg</p>
                            
                         </div>
                     </div>
@@ -260,14 +260,15 @@ const makeCardDeck = () => {
                         
                         <div class="d-flex flex-row justify-content-around align-items-center">
                             <button id="takeoutButton-${prod.id}" type="button"
-                                class="btn btn-outline-danger rounded-circle"
+                                class="btn btn-outline-danger rounded-circle border-0"
                                 onclick="takeOutOfCart('${prod.id}');return false;">
-                                <i class="fas fa-minus"></i>
+                                <i class="fas fa-minus fa-2x"></i>
                             </button>
-                            <div> <span id="prodQty-${prod.id}" class="badge bg-light text-success fs-6"></span> </div>
-                            <button id="addButton-${prod.id}" type="button" class="btn btn-outline-success rounded-circle"
+                            <div> <span id="prodQty-${prod.id}" class="badge bg-light text-success fs-5"></span> </div>
+                            <button id="addButton-${prod.id}" type="button" 
+                                class="btn btn-outline-success rounded-circle border-0"
                                 onclick="addToCart('${prod.id}');return false;">
-                                <i class="fas fa-plus"></i>
+                                <i class="fas fa-plus fa-2x"></i>
                             </button>
                         </div>
                     </div>
