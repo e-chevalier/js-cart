@@ -86,14 +86,14 @@ const setStockCounter = (prodId) => {
     document.getElementById(id).innerHTML = 'Stock ' + actualStock + ' Kg';
    
     // stock badge is red and stock > 0
-    if (actualStock > 0 && document.getElementById(id).classList.contains('bg-danger')) {
-        document.getElementById(id).classList.replace('bg-danger', 'bg-secondary');
+    if (actualStock > 0 && document.getElementById(id).classList.contains('bg-red')) {
+        document.getElementById(id).classList.replace('bg-red', 'bg-green');
         document.getElementById('addButton-'+prodId).style.visibility = "visible";     
     }
 
     // stock is 0 and badge is gray 
-    if (actualStock == 0 && document.getElementById(id).classList.contains('bg-secondary')) {
-        document.getElementById(id).classList.replace('bg-secondary', 'bg-danger');
+    if (actualStock == 0 && document.getElementById(id).classList.contains('bg-green')) {
+        document.getElementById(id).classList.replace('bg-green', 'bg-red');
         document.getElementById('addButton-'+prodId).style.visibility = "hidden";
     } 
 }
@@ -148,6 +148,7 @@ window.addToCart = function addToCart(prodId) {
         setCartCounter(cart.cartSize());
         setStockCounter(prodId);
         updateProdQty(prodId);
+        setAutoOpenCart(prodId);
         makeCartContent();
         infoCart(cart);
     } else {
@@ -168,6 +169,7 @@ window.takeOutOfCart = function takeOutOfCart(prodId) {
     setCartCounter(cart.cartSize());
     setStockCounter(prodId);
     updateProdQty(prodId);
+    setAutoOpenCart(prodId);
     makeCartContent();
     infoCart(cart);
 }
@@ -185,6 +187,7 @@ window.emptyCart = function emptyCart() {
     catalogue.forEach(prod => {
         setStockCounter(prod.id); 
         updateProdQty(prod.id);
+        setAutoOpenCart(prod.id);
     });
     makeCartContent();
     infoCart(cart);
@@ -212,6 +215,23 @@ const updateProdQty = (prodId) => {
 
 }
 
+const setAutoOpenCart = (prodId) => {
+
+    const myShoopingList = cart.shoopingList;
+    let qty = myShoopingList.filter(prod => prod.id === prodId).length;
+    if (qty == 0) { // IS NOT ON THE CART
+        console.log("qty 1: " + qty);
+        document.getElementById('addButton-'+prodId).setAttribute('data-bs-toggle','offcanvas');
+        document.getElementById('addButton-'+prodId).setAttribute('href','#offcanvasCart');
+    } else { // PRESENT ON THE CART
+        // DELETE data-bs-toggle="offcanvas" href="#offcanvasCart"
+        console.log("qty 2 : " + qty);
+        document.getElementById('addButton-'+prodId).removeAttribute('data-bs-toggle');
+        document.getElementById('addButton-'+prodId).removeAttribute('href');
+    }
+
+} 
+
 
 
 
@@ -231,15 +251,17 @@ const makeCardDeck = () => {
             cardContent += `<div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">`;
         }
         cardContent += `
-        <div class="col p-3">
-            <div class="card h-100 text-center">
+        <div class="col py-3 px-4">
+            <div class="card h-100 mx-2">
+                <div class="card-header text-center">
+                    <h5 class="card-title">${prod.name}</h5>
+                </div>
                 <div class="row h-100 g-0 pt-3">
                     <div class="col-5">
                         <img class="card-img-top" src="/assets/img/product/${prod.id}.jpg" alt="">
                     </div>
                     <div class="col-7">
-                        <div class="card-body font-black">
-                            <h4 class="card-title">${prod.name}</h4>
+                        <div class="card-body font-black">     
                             <p class="card-text">Contenido: ${prod.weight} Kg</p>
                             <p class="fw-bold fs-4">$${prod.price} Kg</p>
                            
@@ -247,11 +269,11 @@ const makeCardDeck = () => {
                     </div>
                 </div>
                 <div class="row g-0">
-                    <div class="card-footer">
+                    <div class="card-footer text-center">
                         <p>
                             <button class="btn btn-light text-dark" type="button" data-bs-toggle="collapse"
                                 data-bs-target="#collapse-${i}" aria-expanded="false" aria-controls="collapse-${i}">
-                                Mas información
+                                Más información
                             </button>
                             <div class="collapse" id="collapse-${i}">
                                 <div class="card-text px-4">${prod.description} </div>
@@ -273,8 +295,7 @@ const makeCardDeck = () => {
                         </div>
                     </div>
                     <span id="stock-${prod.id}"
-                        class="position-absolute top-0 start-50 w-50 translate-middle fs-6 badge rounded-pill bg-secondary">
-                        Stock ${prod.stock} Kg</span>
+                        class="d-flex align-items-center position-absolute top-0 start-100 translate-middle badge badge-size text-wrap rounded-circle bg-green border border-white border-3"> Stock${prod.stock}Kg</span>
                 </div>
                
 	        </div>
@@ -290,6 +311,7 @@ const makeCardDeck = () => {
     catalogue.forEach((prod) => {
         updateProdQty(prod.id);
         setStockCounter(prod.id);
+        setAutoOpenCart(prod.id);
     });
 }
 
@@ -351,6 +373,8 @@ const makeCartContent = () => {
 }
 
 window.makeCartContent = () => makeCartContent();
+
+
 
 /**
  * ----------------------------------------

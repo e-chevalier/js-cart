@@ -143,6 +143,26 @@ body::-webkit-scrollbar-thumb {
 
 /**
  * ----------------------------------------
+ * SET BADGE SIZE FOR STOCK CARDS.
+ * ----------------------------------------
+ */
+
+.badge-size{
+    width: 3.5rem;
+    height: 3.5rem;
+}
+
+.bg-green {
+    background-color:darkgreen !important;
+}
+.bg-red {
+    background-color: crimson !important;
+}
+
+
+
+/**
+ * ----------------------------------------
  * Footer - Style
  * ----------------------------------------
  */
