@@ -220,12 +220,10 @@ const setAutoOpenCart = (prodId) => {
     const myShoopingList = cart.shoopingList;
     let qty = myShoopingList.filter(prod => prod.id === prodId).length;
     if (qty == 0) { // IS NOT ON THE CART
-        console.log("qty 1: " + qty);
         document.getElementById('addButton-'+prodId).setAttribute('data-bs-toggle','offcanvas');
         document.getElementById('addButton-'+prodId).setAttribute('href','#offcanvasCart');
     } else { // PRESENT ON THE CART
         // DELETE data-bs-toggle="offcanvas" href="#offcanvasCart"
-        console.log("qty 2 : " + qty);
         document.getElementById('addButton-'+prodId).removeAttribute('data-bs-toggle');
         document.getElementById('addButton-'+prodId).removeAttribute('href');
     }
@@ -242,10 +240,13 @@ const setAutoOpenCart = (prodId) => {
  * ----------------------------------------
  */
 
-const makeCardDeck = () => {
+const makeCardDeck = (filterValue) => {
     let cardContent = ``;
+    let filteredCatalog;
 
-    catalogue.forEach((prod, i) => {
+    filterValue !== undefined ? filteredCatalog = catalogue.filter(prod => prod.type === filterValue) : filteredCatalog = catalogue;
+
+    filteredCatalog.forEach((prod, i) => {
 
         if ((i % 4) == 0) { // INSERT CARDDECK INIT
             cardContent += `<div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">`;
@@ -257,13 +258,13 @@ const makeCardDeck = () => {
                     <h5 class="card-title">${prod.name}</h5>
                 </div>
                 <div class="row h-100 g-0 pt-3">
-                    <div class="col-5">
+                    <div class="col-6">
                         <img class="card-img-top" src="/assets/img/product/${prod.id}.jpg" alt="">
                     </div>
-                    <div class="col-7">
+                    <div class="col-6">
                         <div class="card-body font-black">     
-                            <p class="card-text">Contenido: ${prod.weight} Kg</p>
-                            <p class="fw-bold fs-4">$${prod.price} Kg</p>
+                            <p class="card-text">Precio por Kg</p>
+                            <p class="fw-bold fs-4">$${prod.price}</p>
                            
                         </div>
                     </div>
@@ -286,7 +287,7 @@ const makeCardDeck = () => {
                                 onclick="takeOutOfCart('${prod.id}');return false;">
                                 <i class="fas fa-minus fa-2x"></i>
                             </button>
-                            <div> <span id="prodQty-${prod.id}" class="badge bg-light text-success fs-6"></span> </div>
+                            <div> <span id="prodQty-${prod.id}" class="badge bg-light text-success fs-5"></span> </div>
                             <button id="addButton-${prod.id}" type="button" 
                                 class="btn btn-outline-success rounded-circle border-0"
                                 onclick="addToCart('${prod.id}');return false;">
@@ -308,7 +309,7 @@ const makeCardDeck = () => {
 
     document.getElementById('cards').innerHTML = cardContent;
 
-    catalogue.forEach((prod) => {
+    filteredCatalog.forEach((prod) => {
         updateProdQty(prod.id);
         setStockCounter(prod.id);
         setAutoOpenCart(prod.id);
@@ -373,6 +374,7 @@ const makeCartContent = () => {
 }
 
 window.makeCartContent = () => makeCartContent();
+window.makeCardDeck = (filterValue) => makeCardDeck(filterValue);
 
 
 

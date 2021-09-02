@@ -12,15 +12,17 @@ class Product {
     #_description;
     #_weight;
     #_discount;
+    #_type;
     #_stock;
 
     constructor(prod){
         this.#_id = prod.id || 999999;
         this.#_name = prod.name || newproduct;
         this.#_price = prod.price || 0;
-        this.#_description = prod.description || "empty";
+        this.#_description = prod.description || 'empty';
         this.#_weight = prod.weight || 1; 
         this.#_discount = prod.discount || 0;
+        this.#_type = prod.type || 'wrongtype'
         this.#_stock = prod.stock || 0;
     }
 
@@ -56,6 +58,10 @@ class Product {
 
     get stock(){
         return this.#_stock;
+    }
+
+    get type(){
+        return this.#_type;
     }
 
     /**  Setters for private attributes **/

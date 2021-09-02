@@ -19,10 +19,10 @@
 		<nav class="navbar navbar-expand-lg navbar-light bg-light navbar-custom">
 			<div class="container-fluid">
 				<a class="navbar-brand navbar-custom__brand" href="#">
-					<img class="wow animate__animated animate__zoomIn animate__faster animate__delay-1s"
+					<img onclick="makeCardDeck(); return false;") class="wow animate__animated animate__zoomIn animate__faster animate__delay-1s"
 						src="assets/icons/logo_small.png" alt="Mi Logo">
 				</a>
-				<div class="navbar-text d-flex justify-content-between text-right order-1 px-md-4">
+				<div class="navbar-text d-flex justify-content-between text-right order-lg-1 px-md-4">
 					<a name="Cart" id="Cart" onclick="makeCartContent();return false;"
 						class="btn btn-light position-relative" data-bs-toggle="offcanvas" href="#offcanvasCart"
 						role="button" aria-controls="offcanvasCart">
@@ -39,23 +39,34 @@
 						<i class="fas fa-bars"></i>
 					</button>
 				</div>
-				<div class="collapse navbar-collapse navbar-custom__link navbar-custom__link--colorHover"
-					id="navbarSupportedContent">
+				<div class="collapse navbar-collapse navbar-custom__link navbar-custom__link--colorHover" id="navbarSupportedContent">
 					<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 						<li class="nav-item">
-							<a class="nav-link" href="#">Verduras</a>
+							<a class="nav-link" onclick="makeCardDeck('vegetable'); return false;" href="#">Verduras</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="#">Frutas</a>
+							<a class="nav-link" onclick="makeCardDeck('fruit'); return false;" href="#">Frutas</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="#">Carnes</a>
+							<a class="nav-link" onclick="makeCardDeck('meat'); return false;" href="#">Carnes</a>
 						</li>
 						<li class="nav-item">
 							<a class="nav-link" href="#">Lacteos</a>
 						</li>
 						<li class="nav-item">
 							<a class="nav-link" href="#">Fiambres</a>
+						</li>
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownVegetable" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+							  Verdura
+							</a>
+							<ul class="dropdown-menu" aria-labelledby="navbarDropdownVegetable">
+							  <li><a class="dropdown-item" onclick="makeCardDeck('vegetable'); return false;" href="#">Todas</a></li>
+							  <li><hr class="dropdown-divider"></li>
+							  <li><a class="dropdown-item" href="#">Berenjenas</a></li>
+							  <li><a class="dropdown-item" href="#">Brócoli</a></li>
+							  <li><a class="dropdown-item" href="#">Choclo</a></li>
+							</ul>
 						</li>
 					</ul>
 					<form class="d-flex">
