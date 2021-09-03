@@ -135,11 +135,11 @@ const makeDropDownTemplate = () => {
 			        ${kind}
 				</a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown-${kind}">
-                    <li><a class="dropdown-item" href="./index.html?filterValue=${kind}">Todas</a></li>`;
+                    <li><a class="dropdown-item" href="./home.html?filterValue=${kind}">Todas</a></li>`;
         if (members != []){
             dropDownTemplate += `<li><hr class="dropdown-divider"></li>`;
             members.forEach( m => {
-                dropDownTemplate += `<li><a class="dropdown-item" href="./index.html?filterValue=${m.id}">${m.name}</a></li>`
+                dropDownTemplate += `<li><a class="dropdown-item" href="./home.html?filterValue=${m.id}">${m.name}</a></li>`
             });
         }
         dropDownTemplate += `</ul></li>`;
