@@ -8,7 +8,7 @@ let naranja_params = {
     description: `Naranja de Ombligo, presentan unos gajos grandes y generosos en jugo, pero también en fibra insoluble, es decir carnosas, lo que las hace más aptas para naranja de mesa que para hacer zumos. También presentan la ventaja para este fin de que casi nunca tienen las incómodas pepitas que nos encontramos en otras variedades al morder.`,
     weight: 1, //kg
     discount: 0, //%
-    type: 'fruit',
+    kind: 'Frutas',
     stock: 5 //kg
 }
 
@@ -19,7 +19,7 @@ let manzana_params = {
     description: `Este tipo de manzana tiene una piel brillante a rayas o estrías rojas-anaranjadas sobre una base de color amarillenta.Se recomienda comer en crudo, pero también para cocer para hacer tartas y al horno.`,
     weight: 1,
     discount: 10,
-    type: 'fruit',
+    kind: 'Frutas',
     stock: 6 //kg
 }
 
@@ -30,7 +30,7 @@ let pera_params = {
     description: `También conocida como Blanca de Aranjuez, esta pera se caracteriza por tener un tamaño mediano, un color verde poco intenso y una piel lisa y brillante. Posee una carne jugosa y una semilla pequeña.`,
     weight: 1,
     discount: 5,
-    type: 'fruit',
+    kind: 'Frutas',
     stock: 100 //kg
 }
 
@@ -41,7 +41,7 @@ let banana_params = {
     description: `La banana más exportada del mundo tiene una piel robusta y aguanta bien los viajes. Casi todas las bananas vendidas en Estados Unidos y Europa son de esta variedad.`,
     weight: 1,
     discount: 15,
-    type: 'fruit',
+    kind: 'Frutas',
     stock: 100 //kg
 }
 
@@ -52,7 +52,7 @@ let frutilla_params = {
     description: `De origen californiano (EEUU), de frutos grandes y firmes, es la más consumida en Argentina. Se la considera como la variedad de fresón más cultivada en la actualidad.`,
     weight: 0.5,
     discount: 20,
-    type: 'fruit',
+    kind: 'Frutas',
     stock: 100 //kg
 }
 
@@ -63,7 +63,7 @@ let berenjena_params = {
     description: `Su textura aterciopelada y su sabor suavemente amargo y campestre conmueve a los paladares más exigentes. La berenjena negra es simplemente exquisita.`,
     weight: 1,
     discount: 20,
-    type: 'vegetable',
+    kind: 'Vegetales',
     stock: 100 //kg
 }
 
@@ -74,7 +74,7 @@ let brocoli_params = {
     description: `De color verde profundo e intenso, partiendo de un tallo firme y robusto hasta una particular e inconfundible forma irregular en su copa. El brócoli llega para regalarnos un suave pero distintivo sabor que oscila entre lo amargo y lo dulce.`,
     weight: 0.5,
     discount: 20,
-    type: 'vegetable',
+    kind: 'Vegetales',
     stock: 100 //kg
 }
 
@@ -85,7 +85,7 @@ let choclo_params = {
     description: `Inconfundibles granos color amarillo oro. Crujientes por fuera pero suaves en su interior y, al morderlos, además nos inundan de todo su dulzor tan característico. El choclo es un vegetal tanto conocido como querido por todos.`,
     weight: 0.5,
     discount: 20,
-    type: 'vegetable',
+    kind: 'Vegetales',
     stock: 100 //kg
 }
 
@@ -100,6 +100,5 @@ let choclo = new Product(choclo_params);
 
 
 let catalogue = [naranja, manzana, pera, banana, frutilla, berenjena, brocoli, choclo];
-
 
 export { catalogue };

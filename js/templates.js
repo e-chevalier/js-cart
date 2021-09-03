@@ -1,5 +1,7 @@
 "use strict";
 
+import { catalogue } from "./product_mockup.js";
+
 const makeCardContentTemplate = (filteredCatalog) => {
     
     let cardContent = ``;
@@ -117,4 +119,42 @@ const makeCartContentTemplate = (catalogue, myShoopingList) => {
 }
 
 
-export { makeCardContentTemplate, makeCartContentTemplate };
+const makeDropDownTemplate = () => {
+
+    let dropDownTemplate = ``;
+
+    let kinds = [];
+    catalogue.forEach( prod => {
+        kinds.find( e => e === prod.kind) ? true : kinds.push(prod.kind);
+    });
+
+    kinds.forEach( kind => {
+        catalogue.filter(prod => prod.kind === kind)
+    });
+
+    kinds.forEach( kind => {
+        
+        let members = catalogue.filter(prod => prod.kind === kind);
+
+        dropDownTemplate +=
+            `<li class="nav-item dropdown">
+				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown-${kind}" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+			        ${kind}
+				</a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown-${kind}">
+                    <li><a class="dropdown-item" onclick="makeCardDeck('${kind}'); return false;" href="#">Todas</a></li>`;
+        if (members != []){
+            dropDownTemplate += `<li><hr class="dropdown-divider"></li>`;
+            members.forEach( m => {
+                dropDownTemplate += `<li><a class="dropdown-item" onclick="makeCardDeck('${m.id}'); return false;" href="#">${m.name}</a></li>`
+            });
+        }
+        dropDownTemplate += `</ul></li>`;
+    });
+
+    return dropDownTemplate;
+
+}
+
+
+export { makeCardContentTemplate, makeCartContentTemplate, makeDropDownTemplate };

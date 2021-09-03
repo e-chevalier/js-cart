@@ -2,7 +2,7 @@
 import { catalogue } from './product_mockup.js';
 import { Cart } from './cart.js';
 import { Product } from './product.js';
-import { makeCardContentTemplate, makeCartContentTemplate } from './templates.js';
+import { makeCardContentTemplate, makeCartContentTemplate, makeDropDownTemplate } from './templates.js';
 
 let cart = null;
 
@@ -82,21 +82,24 @@ const setCartCounter = () => {
  * ----------------------------------------
  */
 const setStockCounter = (prodId) => {
+    
     let id = 'stock-' + prodId;
     let actualStock = catalogue.find(prod => prod.id == prodId).stock;
-    document.getElementById(id).innerHTML = 'Stock ' + actualStock + ' Kg';
-   
-    // stock badge is red and stock > 0
-    if (actualStock > 0 && document.getElementById(id).classList.contains('bg-red')) {
-        document.getElementById(id).classList.replace('bg-red', 'bg-green');
-        document.getElementById('addButton-'+prodId).style.visibility = "visible";     
-    }
+    if( document.getElementById(id) ) {  // DOM ELEMENT IS PRESENT
+        document.getElementById(id).innerHTML = 'Stock ' + actualStock + ' Kg';
+    
+        // stock badge is red and stock > 0
+        if (actualStock > 0 && document.getElementById(id).classList.contains('bg-red')) {
+            document.getElementById(id).classList.replace('bg-red', 'bg-green');
+            document.getElementById('addButton-'+prodId).style.visibility = "visible";     
+        }
 
-    // stock is 0 and badge is gray 
-    if (actualStock == 0 && document.getElementById(id).classList.contains('bg-green')) {
-        document.getElementById(id).classList.replace('bg-green', 'bg-red');
-        document.getElementById('addButton-'+prodId).style.visibility = "hidden";
-    } 
+        // stock is 0 and badge is gray 
+        if (actualStock == 0 && document.getElementById(id).classList.contains('bg-green')) {
+            document.getElementById(id).classList.replace('bg-green', 'bg-red');
+            document.getElementById('addButton-'+prodId).style.visibility = "hidden";
+        }
+    }
 }
 
 /**
@@ -205,13 +208,17 @@ window.emptyCart = function emptyCart() {
 
 const updateProdQty = (prodId) => {
 
-    const myShoopingList = cart.shoopingList;
-    let qty = myShoopingList.filter(prod => prod.id === prodId).length;
-    if (qty > 0) {
-        document.getElementById('prodQty-'+prodId).innerHTML = qty + 'Kg';
-        document.getElementById('prodQty-'+prodId).style.visibility = "visible";
-    } else {
-        document.getElementById('prodQty-'+prodId).style.visibility = "hidden";
+    let id = 'prodQty-'+prodId;
+
+    if( document.getElementById(id) ) {  // DOM ELEMENT IS PRESENT
+        const myShoopingList = cart.shoopingList;
+        let qty = myShoopingList.filter(prod => prod.id === prodId).length;
+        if (qty > 0) {
+            document.getElementById(id).innerHTML = qty + 'Kg';
+            document.getElementById(id).style.visibility = "visible";
+        } else {
+            document.getElementById(id).style.visibility = "hidden";
+        }
     }
 
 }
@@ -226,17 +233,21 @@ const updateProdQty = (prodId) => {
 
 const setAutoOpenCart = (prodId) => {
 
-    const myShoopingList = cart.shoopingList;
-    let qty = myShoopingList.filter(prod => prod.id === prodId).length;
-    if (qty == 0) { // IS NOT ON THE CART
-        document.getElementById('addButton-'+prodId).setAttribute('data-bs-toggle','offcanvas');
-        document.getElementById('addButton-'+prodId).setAttribute('href','#offcanvasCart');
-    } else { // PRESENT ON THE CART
-        // DELETE data-bs-toggle="offcanvas" href="#offcanvasCart"
-        document.getElementById('addButton-'+prodId).removeAttribute('data-bs-toggle');
-        document.getElementById('addButton-'+prodId).removeAttribute('href');
-    }
+    let id = 'addButton-'+prodId;
 
+    if( document.getElementById(id) ) {  // DOM ELEMENT IS PRESENT
+
+        const myShoopingList = cart.shoopingList;
+        let qty = myShoopingList.filter(prod => prod.id === prodId).length;
+        if (qty == 0) { // IS NOT ON THE CART
+            document.getElementById(id).setAttribute('data-bs-toggle','offcanvas');
+            document.getElementById(id).setAttribute('href','#offcanvasCart');
+        } else { // PRESENT ON THE CART
+            // DELETE data-bs-toggle="offcanvas" href="#offcanvasCart"
+            document.getElementById(id).removeAttribute('data-bs-toggle');
+            document.getElementById(id).removeAttribute('href');
+        }
+    }
 } 
 
 
@@ -253,7 +264,16 @@ const makeCardDeck = (filterValue) => {
     let cardContent = ``;
     let filteredCatalog;
 
-    filterValue !== undefined ? filteredCatalog = catalogue.filter(prod => prod.type === filterValue) : filteredCatalog = catalogue;
+    let kinds = [];
+    catalogue.forEach( prod => {
+        kinds.find( e => e === prod.kind) ? true : kinds.push(prod.kind);
+    });
+    
+    if ( kinds.find( k => k === filterValue) ){  // FilterValue belongs to kinds
+        filterValue !== undefined ? filteredCatalog = catalogue.filter(prod => prod.kind === filterValue) : filteredCatalog = catalogue;
+    } else { // FilterValue does not belong to kinds, it must be a product id.
+        filterValue !== undefined ? filteredCatalog = catalogue.filter(prod => prod.id === filterValue) : filteredCatalog = catalogue;
+    }
 
     // Template generated in template.js
     cardContent = makeCardContentTemplate(filteredCatalog);
@@ -312,6 +332,13 @@ function search(e){
 }
 
 
+const makeDropDownList = () => {
+    let dropDownTemplate = ``;
+    dropDownTemplate = makeDropDownTemplate();
+    document.getElementById('dropDownList').innerHTML = dropDownTemplate;
+}
+
+
 /**
  * ----------------------------------------
  * Método Main - Realizar compra.
@@ -319,6 +346,7 @@ function search(e){
  */
 
 const main = () => {
+    makeDropDownList();
     initCart();
     makeCardDeck();
     makeCartContent();
