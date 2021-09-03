@@ -1,1 +1,1 @@
-<?php include_once("home.html?filterValue=all"); ?>
+<?php header( 'Location: /home.html?filterValue=all' ) ;  ?>
