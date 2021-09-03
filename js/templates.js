@@ -1,6 +1,6 @@
 "use strict";
 
-import { catalogue } from "./product_mockup.js";
+import { catalogue, getKindsFromCatalogue } from "./product_mockup.js";
 
 const makeCardContentTemplate = (filteredCatalog) => {
     
@@ -123,14 +123,7 @@ const makeDropDownTemplate = () => {
 
     let dropDownTemplate = ``;
 
-    let kinds = [];
-    catalogue.forEach( prod => {
-        kinds.find( e => e === prod.kind) ? true : kinds.push(prod.kind);
-    });
-
-    kinds.forEach( kind => {
-        catalogue.filter(prod => prod.kind === kind)
-    });
+    let kinds = getKindsFromCatalogue();
 
     kinds.forEach( kind => {
         
@@ -142,15 +135,19 @@ const makeDropDownTemplate = () => {
 			        ${kind}
 				</a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown-${kind}">
-                    <li><a class="dropdown-item" onclick="makeCardDeck('${kind}'); return false;" href="#">Todas</a></li>`;
+                    <li><a class="dropdown-item" href="./index.html?filterValue=${kind}">Todas</a></li>`;
         if (members != []){
             dropDownTemplate += `<li><hr class="dropdown-divider"></li>`;
             members.forEach( m => {
-                dropDownTemplate += `<li><a class="dropdown-item" onclick="makeCardDeck('${m.id}'); return false;" href="#">${m.name}</a></li>`
+                dropDownTemplate += `<li><a class="dropdown-item" href="./index.html?filterValue=${m.id}">${m.name}</a></li>`
             });
         }
         dropDownTemplate += `</ul></li>`;
     });
+
+    dropDownTemplate += `<li class="nav-item">
+                            <a class="nav-link" href="./page2.html">Ayuda</a>
+                        </li>`;
 
     return dropDownTemplate;
 

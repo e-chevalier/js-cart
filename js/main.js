@@ -1,5 +1,5 @@
 "use strict";
-import { catalogue } from './product_mockup.js';
+import { catalogue, getKindsFromCatalogue } from './product_mockup.js';
 import { Cart } from './cart.js';
 import { Product } from './product.js';
 import { makeCardContentTemplate, makeCartContentTemplate, makeDropDownTemplate } from './templates.js';
@@ -8,7 +8,7 @@ let cart = null;
 
 /**
  * ----------------------------------------
- * Método para ver contendido del carro en la consola.
+ * Función para ver contendido del carro en la consola.
  * ----------------------------------------
  */
 
@@ -68,7 +68,7 @@ const updateRemainingStock = () => {
 
 /**
  * ----------------------------------------
- * Método para modificar el contador de productos en el carrito.
+ * Función para modificar el contador de productos en el carrito.
  * ----------------------------------------
  */
 const setCartCounter = () => {
@@ -78,7 +78,7 @@ const setCartCounter = () => {
 
 /**
  * ----------------------------------------
- * Método para modificar el contador del stock
+ * Función para modificar el contador del stock
  * ----------------------------------------
  */
 const setStockCounter = (prodId) => {
@@ -104,7 +104,7 @@ const setStockCounter = (prodId) => {
 
 /**
  * ----------------------------------------
- * Método para modificar la visibilidad del boton add en el carrito.
+ * Función para modificar la visibilidad del boton add en el carrito.
  * ----------------------------------------
  */
 
@@ -141,7 +141,7 @@ const initCart = () => {
 
 /**
  * ----------------------------------------
- * Método para agregar Producto al Carrito
+ * Función para agregar Producto al Carrito
  * ----------------------------------------
  */
 
@@ -163,7 +163,7 @@ window.addToCart = function addToCart(prodId) {
 
 /**
  * ----------------------------------------
- * Método para sacar Producto del Carrito
+ * Función para sacar Producto del Carrito
  * ----------------------------------------
  */
 
@@ -180,7 +180,7 @@ window.takeOutOfCart = function takeOutOfCart(prodId) {
 
 /**
  * ----------------------------------------
- * Método para vaciar el carrito
+ * Función para vaciar el carrito
  * ----------------------------------------
  */
 
@@ -201,7 +201,7 @@ window.emptyCart = function emptyCart() {
 
 /**
  * ----------------------------------------
- * Método para actualizar el contador de KG que el usuario seleccionó
+ * Función para actualizar el contador de KG que el usuario seleccionó
  * en base a los productos que tiene en el carrito.
  * ----------------------------------------
  */
@@ -250,46 +250,61 @@ const setAutoOpenCart = (prodId) => {
     }
 } 
 
-
-
-
 /**
  * ----------------------------------------
- * Método para Crear los CARDDECK de manera dinamica.
- *  
+ * Función para obtener el parametro pasado en URL y usarlo para crear
+ * un cardDeck filtrado.
  * ----------------------------------------
  */
 
-const makeCardDeck = (filterValue) => {
-    let cardContent = ``;
-    let filteredCatalog;
-
-    let kinds = [];
-    catalogue.forEach( prod => {
-        kinds.find( e => e === prod.kind) ? true : kinds.push(prod.kind);
-    });
-    
-    if ( kinds.find( k => k === filterValue) ){  // FilterValue belongs to kinds
-        filterValue !== undefined ? filteredCatalog = catalogue.filter(prod => prod.kind === filterValue) : filteredCatalog = catalogue;
-    } else { // FilterValue does not belong to kinds, it must be a product id.
-        filterValue !== undefined ? filteredCatalog = catalogue.filter(prod => prod.id === filterValue) : filteredCatalog = catalogue;
-    }
-
-    // Template generated in template.js
-    cardContent = makeCardContentTemplate(filteredCatalog);
-    document.getElementById('cards').innerHTML = cardContent;
-
-    filteredCatalog.forEach((prod) => {
-        updateProdQty(prod.id);
-        setStockCounter(prod.id);
-        setAutoOpenCart(prod.id);
-    });
+const getFilterValueByUrlParameter = () => {
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    console.log(queryString);
+    const filterValue = urlParams.get('filterValue');
+    console.log(filterValue);
+    return filterValue;
 }
 
 
 /**
  * ----------------------------------------
- * Método para crear el contenido del carrito de manera dinamica.
+ * Función para Crear los CARDDECK de manera dinamica.
+ *  
+ * ----------------------------------------
+ */
+
+const makeCardDeck = (filterValue) => {
+    if ( filterValue != null ) { // Filtering value was entered
+
+        let cardContent = ``;
+        let filteredCatalog;
+
+        let kinds = getKindsFromCatalogue();
+              
+        if ( kinds.find( k => k === filterValue) ){  // FilterValue belongs to kinds
+            filterValue !== 'all' ? filteredCatalog = catalogue.filter(prod => prod.kind === filterValue) : filteredCatalog = catalogue;
+        } else { // FilterValue does not belong to kinds, it must be a product id.
+            filterValue !== 'all' ? filteredCatalog = catalogue.filter(prod => prod.id === filterValue) : filteredCatalog = catalogue;
+        }
+
+        // Template generated in template.js
+        cardContent = makeCardContentTemplate(filteredCatalog);
+        document.getElementById('cards').innerHTML = cardContent;
+
+        filteredCatalog.forEach((prod) => {
+            updateProdQty(prod.id);
+            setStockCounter(prod.id);
+            setAutoOpenCart(prod.id);
+        });
+
+    }
+}
+
+
+/**
+ * ----------------------------------------
+ * Función para crear el contenido del carrito de manera dinamica.
  *  
  * ----------------------------------------
  */
@@ -318,7 +333,7 @@ window.makeCardDeck = (filterValue) => makeCardDeck(filterValue);
 
 /**
  * ----------------------------------------
- * FormSearch 
+ * FormSearch  - Se agrega evento submit para realizar la busqueda.
  * ----------------------------------------
  */
 
@@ -331,6 +346,11 @@ function search(e){
     searchValue !== ''? makeCardDeck(e.target.children[0].value): makeCardDeck();
 }
 
+/**
+ * ----------------------------------------
+ * Función para general los enlaces del navbar de manera dinámica.
+ * ----------------------------------------
+ */
 
 const makeDropDownList = () => {
     let dropDownTemplate = ``;
@@ -341,14 +361,14 @@ const makeDropDownList = () => {
 
 /**
  * ----------------------------------------
- * Método Main - Realizar compra.
+ * Función Main - Realizar compra.
  * ----------------------------------------
  */
 
 const main = () => {
     makeDropDownList();
     initCart();
-    makeCardDeck();
+    makeCardDeck( getFilterValueByUrlParameter() );
     makeCartContent();
 }
 

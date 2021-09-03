@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="./assets/Awesome/css/all.min.css" rel="stylesheet">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="./css/animate.min.css">
+    <link rel="stylesheet" href="/css/sass-style.min.css">
+    <title>Clase 9 js Coder</title>
+</head>
+
+<body>
+    <div class="container-fluid p-0">
+		<!-- HEADER -->
+		<nav class="navbar navbar-expand-lg navbar-light bg-light navbar-custom">
+			<div class="container-fluid">
+				<a class="navbar-brand navbar-custom__brand" href="./index.html?filterValue=all">
+					<img class="wow animate__animated animate__zoomIn animate__faster animate__delay-1s"
+						src="assets/icons/logo_small.png" alt="Mi Logo">
+				</a>
+				<div class="navbar-text d-flex justify-content-between text-right order-lg-1 px-md-4">
+					<a name="Cart" id="Cart" onclick="makeCartContent();return false;"
+						class="btn btn-light position-relative" data-bs-toggle="offcanvas" href="#offcanvasCart"
+						role="button" aria-controls="offcanvasCart">
+						<span class="fa-layers fa-fw">
+							<i class="fas fa-shopping-cart fa-lg"></i>
+							<span id="cartCounter"
+								class="position-absolute top-0 start-100 translate-middle badge bg-success"></span>
+						</span>
+					</a>
+
+					<button class="navbar-toggler border-0 ps-4 navbar-custom__toogler" type="button"
+						data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+						aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+						<i class="fas fa-bars"></i>
+					</button>
+				</div>
+				<div class="collapse navbar-collapse navbar-custom__link navbar-custom__link--colorHover" id="navbarSupportedContent">
+					<ul id="dropDownList" class="navbar-nav me-auto mb-2 mb-lg-0">
+						<!-- CONTENIDO GENERADO DE MANERA DINAMICA DESDE JS -->
+					</ul>
+					<form  id="formSearch" class="d-flex">
+						<input id="search" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+						<button class="btn btn-outline-success" type="submit">Search</button>
+					</form>
+				</div>
+			</div>
+		</nav>
+	</div>
+
+    <p class="display-1"> PAGINA FUERA DEL INDEX </p>
+
+
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasCart" aria-labelledby="offcanvasCartLabel">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="offcanvasCartLabel">Carrito de compras</h5>
+            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <div class="d-grid gap-2 col-12 mx-auto mb-4">
+                <button id="total" class="btn btn-info" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#collapseTotal" aria-expanded="false" aria-controls="collapseTotal">
+                </button>
+                <div class="collapse collapse-horizontal" id="collapseTotal">
+                    <div class="card card-body border-0" style="width: 350px;">
+                        <p id="subtotal" class="h6"> </p>
+                        <p id="envio" class="h6"></p>
+                    </div>
+                </div>
+                <button class="btn btn-success" disabled type="button">
+                    INICIAR PAGO
+                </button>
+                <button type="button" class="btn btn-warning text-reset" data-bs-dismiss="offcanvas" aria-label="Close">
+                    SEGUIR COMPRANDO
+                </button>
+            </div>
+            <div id="cartContent">
+                <!-- CONTENIDO GENERADO DE MANERA DINAMICA DESDE JS -->
+            </div>
+            <div class="d-grid gap-1 col-12 mx-auto mb-4">
+                <button type="button" id="emptyCart" onclick="emptyCart();return false;"
+                    class="btn btn-outline-secondary">
+                    <i class="fas fa-trash-restore">
+                        <span class="roboto-regular">Vaciar Carrito</span>
+                    </i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer container-fluid  mx-auto w-100 px-0 text-center">
+
+        <div class="d-flex flex-column flex-md-row">
+
+            <div class="footer__address container col-12 col-md-4 col-lg-4 p-4">
+                <div>
+                    <address>
+                        <p class="font-weight-bold mb-3">ESTAMOS EN</p>
+                        <p> Av. Cnel. Marcelino E. Freyre </p>
+                        <p> Buenos Aires </p>
+                        <p>Tel: +541147781500</p>
+                    </address>
+                </div>
+            </div>
+
+            <div class="footer__socialMedia container col-12 col-md-4 col-lg-4 p-4">
+                <p class="font-weight-bold mb-3">SEGUINOS</p>
+                <nav>
+                    <ul class="list-inline p-2">
+                        <li class="list-inline-item"><a href="https://es-la.facebook.com/" target="_blank"
+                                rel="noopener noreferrer">
+                                <i class="fab fa-facebook fa-2x "></i></a></li>
+                        <li class="list-inline-item"><a href="https://twitter.com/argentina" target="_blank"
+                                rel="noopener noreferrer">
+                                <i class="fab fa-twitter fa-2x "></i></a></li>
+                        <li class="list-inline-item"><a href="https://www.instagram.com/?hl=es-la" target="_blank"
+                                rel="noopener noreferrer">
+                                <i class="fab fa-instagram fa-2x "></i></a></li>
+                        <li class="list-inline-item"><a
+                                href="https://api.whatsapp.com/send/?phone=5493513512412907&amp;text&amp;app_absent=0"
+                                target="_blank" rel="noopener noreferrer">
+                                <i class="fab fa-whatsapp fa-2x "></i></a></li>
+                    </ul>
+                </nav>
+            </div>
+
+            <div class="footer__schedule container col-12 col-md-4 col-lg-4 p-4">
+                <div>
+                    <p class="font-weight-bold mb-3">HORARIOS</p>
+                    <p>Lunes a Sábados</p>
+                    <p>09:00 - 19:30</p>
+                    <p>Domingos</p>
+                    <p>Cerrado</p>
+                </div>
+            </div>
+
+        </div>
+        <div class="footer__goUp container col-12 col-md-12 col-lg-12">
+            <div>
+                <div><a href="#"><i class="fas fa-angle-double-up fa-2x p-3"></i></a></div>
+                <p class="text-secondary">&#169; 2021 TTLG. ALL RIGHTS RESERVED. DESIGN FROM TTLG &#174;</p>
+            </div>
+        </div>
+    </footer><!-- FOOTER END -->
+
+
+
+    <script src="js/wow.min.js"></script>
+    <script>
+        new WOW().init();
+    </script>
+    <script type="module" src="/js/main.js"></script>
+    <script src="/bootstrap/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
