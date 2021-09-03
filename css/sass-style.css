@@ -204,7 +204,7 @@ body {
   font-family: "Roboto", sans-serif;
   background-color: #198755;
   scrollbar-width: thin;
-  scrollbar-color: #2a5228 #011a22;
+  scrollbar-color: #198755 #011a22;
 }
 
 body::-webkit-scrollbar {
@@ -216,7 +216,7 @@ body::-webkit-scrollbar-track {
 }
 
 body::-webkit-scrollbar-thumb {
-  background-color: #2a5228;
+  background-color: #198755;
   border-radius: 6px;
   border: 3px solid #011a22;
 }
@@ -317,12 +317,17 @@ body::-webkit-scrollbar-thumb {
 
 /* Change the color of active or hovered links */
 .navbar-custom__link--colorHover .nav-item.active .nav-link, .navbar-custom__link--colorHover .nav-item:focus .nav-link, .navbar-custom__link--colorHover .nav-item:hover .nav-link {
-  color: #2a5228;
+  color: #198755;
 }
 
 /* Change the color of toogler */
 .navbar-custom__toogler.navbar-toggler i {
-  color: #2a5228;
+  color: #198755;
+}
+
+/* Remove arrow on dropdown-toogler */
+.dropdown-toggle::after {
+  content: none;
 }
 
 /**
@@ -373,7 +378,7 @@ body::-webkit-scrollbar-thumb {
 }
 
 .footer__socialMedia a:hover {
-  color: #2a5228;
+  color: #198755;
 }
 
 .footer__address {
@@ -391,7 +396,7 @@ body::-webkit-scrollbar-thumb {
 }
 
 .footer__goUp a:hover {
-  color: #2a5228;
+  color: #198755;
 }
 
 .footer__goUp p {

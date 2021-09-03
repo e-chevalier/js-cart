@@ -139,6 +139,11 @@ body::-webkit-scrollbar-thumb {
     }
 }
 
+/* Remove arrow on dropdown-toogler */
+.dropdown-toggle::after {
+    content: none;
+}
+
 
 
 /**
