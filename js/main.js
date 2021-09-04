@@ -260,9 +260,7 @@ const setAutoOpenCart = (prodId) => {
 const getFilterValueByUrlParameter = () => {
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
-    console.log(queryString);
-    const filterValue = urlParams.get('filterValue');
-    console.log(filterValue);
+    const filterValue = urlParams.get('filterValue');   
     return filterValue;
 }
 
@@ -355,9 +353,61 @@ function search(e){
 const makeDropDownList = () => {
     let dropDownTemplate = ``;
     dropDownTemplate = makeDropDownTemplate();
-    document.getElementById('dropDownList').innerHTML = dropDownTemplate;
+    document.getElementById('navbarNavContent').innerHTML = dropDownTemplate;
 }
 
+
+/**
+ * ----------------------------------------
+ * Función para agregar un nav-link en el navbar
+ * ----------------------------------------
+ */
+
+const createNavLink = (pageName, textContent) => {
+    let li = document.createElement('li');
+    li.classList.add('nav-item');
+
+    let a = document.createElement('a');
+    a.classList.add('nav-link');
+    a.setAttribute('href', `./${pageName}.html`);
+    a.textContent = textContent;
+
+    li.appendChild(a);
+    
+    if( document.getElementById('navbarNavContent') ) {
+        document.getElementById('navbarNavContent').appendChild(li);
+    }
+}
+
+/**
+ * ----------------------------------------
+ * Evento para autohide del navbar
+ * ----------------------------------------
+ */
+
+document.addEventListener("DOMContentLoaded", function(){
+		
+    let e = document.querySelector('.autohide');
+
+    let navbar_height = document.querySelector('.navbar').offsetHeight;
+    document.body.style.paddingTop = navbar_height + 'px';
+
+    if(e){
+        let last_scroll_top = 0;
+        window.addEventListener('scroll', function() {
+               let scroll_top = window.scrollY;
+           if(scroll_top < last_scroll_top) {
+                e.classList.remove('scrolled-down');
+                e.classList.add('scrolled-up');
+            }
+            else {
+                e.classList.remove('scrolled-up');
+                e.classList.add('scrolled-down');
+            }
+            last_scroll_top = scroll_top;
+        }); 
+    }
+}); 
 
 /**
  * ----------------------------------------
@@ -367,6 +417,7 @@ const makeDropDownList = () => {
 
 const main = () => {
     makeDropDownList();
+    createNavLink('page2', 'Ayuda');
     initCart();
     makeCardDeck( getFilterValueByUrlParameter() );
     makeCartContent();

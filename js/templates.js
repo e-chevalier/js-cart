@@ -145,13 +145,8 @@ const makeDropDownTemplate = () => {
         dropDownTemplate += `</ul></li>`;
     });
 
-    dropDownTemplate += `<li class="nav-item">
-                            <a class="nav-link" href="./page2.html">Ayuda</a>
-                        </li>`;
-
     return dropDownTemplate;
 
 }
 
-
-export { makeCardContentTemplate, makeCartContentTemplate, makeDropDownTemplate };
+export { makeCardContentTemplate, makeCartContentTemplate, makeDropDownTemplate};
