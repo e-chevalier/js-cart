@@ -135,11 +135,11 @@ const makeDropDownTemplate = () => {
 			        ${kind}
 				</a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown-${kind}">
-                    <li><a class="dropdown-item" href="./home.html?filterValue=${kind}">Todas</a></li>`;
+                    <li><a class="dropdown-item" href="./home.html?filterValue=${kind}#cards">Todas</a></li>`;
         if (members != []){
             dropDownTemplate += `<li><hr class="dropdown-divider"></li>`;
             members.forEach( m => {
-                dropDownTemplate += `<li><a class="dropdown-item" href="./home.html?filterValue=${m.id}">${m.name}</a></li>`
+                dropDownTemplate += `<li><a class="dropdown-item" href="./home.html?filterValue=${m.id}#cards">${m.name}</a></li>`
             });
         }
         dropDownTemplate += `</ul></li>`;
@@ -188,11 +188,11 @@ const createNavLink = (pageName, textContent) => {
 
 /**
  * ----------------------------------------
- * Función para crear los items de carousel de manera dinámica.
+ * Función para crear los items de carousel Home de manera dinámica.
  * ----------------------------------------
  */
 
-const createCarouselItems = (urlImg, qty, carouselInnerId) => {
+const createCarouselHomeItems = (urlImg, qty, carouselInnerId) => {
 
     let carousel = document.getElementById(carouselInnerId);
 
@@ -221,4 +221,47 @@ const createCarouselItems = (urlImg, qty, carouselInnerId) => {
    
 }
 
-export { makeCardContentTemplate, makeCartContentTemplate, makeDropDownList, createNavLink, createCarouselItems };
+
+/**
+ * ----------------------------------------
+ * Función para crear los items de carousel de Categorias de manera dinámica.
+ * ----------------------------------------
+ */
+
+
+const createCarouselCatagoriesItems = (urlImg, categNames, carouselCategInnerId) => {
+
+    let carousel = document.getElementById(carouselCategInnerId);
+    let carouselContent = ``;
+
+    if( carousel ) {
+
+        for(let i = 0; i < categNames.length; i++){
+            
+            if (i == 0 || (i % 3) == 0) { // INIT CAROUSEL ITEM AND SET ITEM ACTIVE
+                i == 0 ? carouselContent += `<div class="carousel-item active">`: `<div class="carousel-item">`;
+                carouselContent += `<div id="categories${i+1}" class="container py-3 my-3">
+                                        <div class="row justify-content-center row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-3 g-3">`;
+            }
+               
+            carouselContent += `<div class="col d-flex flex-column align-items-center">
+                                    <div class="card overflow-hidden justify-content-center" style="width: 18rem;  min-width: 12rem;">
+                                        <img src="${urlImg}/${categNames[i]}_600x400.jpg" class="card-img-bottom" alt="${categNames[i]}_600x400.jpg">
+                                        <a href="./home.html?filterValue=${categNames[i]}#cards" class="btn btn-light text-black stretched-link">${categNames[i]}</a>
+                                    </div>
+                                </div>`;
+            if((i%3) == 2 ){
+                carouselContent += `</div></div></div>`;
+            }
+        }
+
+        carousel.innerHTML = carouselContent;
+
+    }
+
+    
+
+}
+
+
+export { makeCardContentTemplate, makeCartContentTemplate, makeDropDownList, createNavLink, createCarouselHomeItems, createCarouselCatagoriesItems};

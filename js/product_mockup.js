@@ -63,7 +63,7 @@ let berenjena_params = {
     description: `Su textura aterciopelada y su sabor suavemente amargo y campestre conmueve a los paladares más exigentes. La berenjena negra es simplemente exquisita.`,
     weight: 1,
     discount: 20,
-    kind: 'Vegetales',
+    kind: 'Verduras',
     stock: 100 //kg
 }
 
@@ -74,7 +74,7 @@ let brocoli_params = {
     description: `De color verde profundo e intenso, partiendo de un tallo firme y robusto hasta una particular e inconfundible forma irregular en su copa. El brócoli llega para regalarnos un suave pero distintivo sabor que oscila entre lo amargo y lo dulce.`,
     weight: 0.5,
     discount: 20,
-    kind: 'Vegetales',
+    kind: 'Verduras',
     stock: 100 //kg
 }
 
@@ -85,7 +85,18 @@ let choclo_params = {
     description: `Inconfundibles granos color amarillo oro. Crujientes por fuera pero suaves en su interior y, al morderlos, además nos inundan de todo su dulzor tan característico. El choclo es un vegetal tanto conocido como querido por todos.`,
     weight: 0.5,
     discount: 20,
-    kind: 'Vegetales',
+    kind: 'Verduras',
+    stock: 100 //kg
+}
+
+let almendra_params = {
+    id: 'nuts00001',
+    name: "Almendra",
+    price: 80, 
+    description: `Inconfundibles granos color amarillo oro. Crujientes por fuera pero suaves en su interior y, al morderlos, además nos inundan de todo su dulzor tan característico. El choclo es un vegetal tanto conocido como querido por todos.`,
+    weight: 0.5,
+    discount: 20,
+    kind: 'Frutos Secos',
     stock: 100 //kg
 }
 
@@ -97,9 +108,10 @@ let frutilla = new Product(frutilla_params);
 let berenjena = new Product(berenjena_params);
 let brocoli = new Product(brocoli_params);
 let choclo = new Product(choclo_params);
+let almendra = new Product(almendra_params);
 
 
-let catalogue = [naranja, manzana, pera, banana, frutilla, berenjena, brocoli, choclo];
+let catalogue = [naranja, manzana, pera, banana, frutilla, berenjena, brocoli, choclo, almendra];
 
 /**
  * ----------------------------------------

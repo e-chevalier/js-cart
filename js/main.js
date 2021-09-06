@@ -2,7 +2,13 @@
 import { catalogue, getKindsFromCatalogue } from './product_mockup.js';
 import { Cart } from './cart.js';
 import { Product } from './product.js';
-import { makeCardContentTemplate, makeCartContentTemplate, makeDropDownList, createNavLink, createCarouselItems } from './templates.js';
+import { 
+    makeCardContentTemplate, 
+    makeCartContentTemplate, 
+    makeDropDownList, 
+    createNavLink, 
+    createCarouselHomeItems,
+    createCarouselCatagoriesItems  } from './templates.js';
 
 let cart = null;
 
@@ -385,7 +391,8 @@ document.addEventListener("DOMContentLoaded", function(){
 const main = () => {
     makeDropDownList();
     createNavLink('page2', 'Ayuda');
-    createCarouselItems('./assets/img/banner', 2, 'homeCarouselInner');
+    createCarouselHomeItems('./assets/img/banner', 2, 'homeCarouselInner');
+    createCarouselCatagoriesItems('./assets/img/categories', getKindsFromCatalogue(), 'categoriesCarouselInner');
     initCart();
     makeCardDeck( getFilterValueByUrlParameter() );
     makeCartContent();
