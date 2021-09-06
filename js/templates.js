@@ -9,10 +9,10 @@ const makeCardContentTemplate = (filteredCatalog) => {
     filteredCatalog.forEach((prod, i) => {
 
         if ((i % 4) == 0) { // INSERT CARDDECK INIT
-            cardContent += `<div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">`;
+            cardContent += `<div class="row row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-4 g-4">`;
         }
         cardContent += `
-        <div class="col py-3 px-4">
+        <div class="col py-4 px-4">
             <div class="card h-100 mx-2">
                 <div class="card-header text-center">
                     <h5 class="card-title">${prod.name}</h5>
@@ -149,4 +149,76 @@ const makeDropDownTemplate = () => {
 
 }
 
-export { makeCardContentTemplate, makeCartContentTemplate, makeDropDownTemplate};
+
+/**
+ * ----------------------------------------
+ * Función para general los enlaces del navbar de manera dinámica.
+ * ----------------------------------------
+ */
+
+ const makeDropDownList = () => {
+    let dropDownTemplate = ``;
+    dropDownTemplate = makeDropDownTemplate();
+    document.getElementById('navbarNavContent').innerHTML = dropDownTemplate;
+}
+
+
+/**
+ * ----------------------------------------
+ * Función para agregar un nav-link en el navbar
+ * ----------------------------------------
+ */
+
+const createNavLink = (pageName, textContent) => {
+    let li = document.createElement('li');
+    li.classList.add('nav-item');
+
+    let a = document.createElement('a');
+    a.classList.add('nav-link');
+    a.setAttribute('href', `./${pageName}.html`);
+    a.textContent = textContent;
+
+    li.appendChild(a);
+    
+    if( document.getElementById('navbarNavContent') ) {
+        document.getElementById('navbarNavContent').appendChild(li);
+    }
+}
+
+
+/**
+ * ----------------------------------------
+ * Función para crear los items de carousel de manera dinámica.
+ * ----------------------------------------
+ */
+
+const createCarouselItems = (urlImg, qty, carouselInnerId) => {
+
+    let carousel = document.getElementById(carouselInnerId);
+
+    if( carousel ) {
+
+        for (let i = 1; i <= qty; i++){
+            
+            let div = document.createElement('div');
+            div.classList.add('carousel-item');
+            if (i == 1 ) { div.classList.add('active') }; 
+            
+            let img = document.createElement('img');
+            img.classList.add(['d-block', 'w-100']);
+            img.setAttribute('src', `${urlImg}/${i}_1920.jpg`);    
+            img.setAttribute('alt', `${i}_large.jpg`);
+            img.setAttribute('srcset',`${urlImg}/${i}_1920.jpg 1920w,
+								${urlImg}/${i}_1366.jpg 1366w,
+								${urlImg}/${i}_1024.jpg 1024w,
+								${urlImg}/${i}_768.jpg 768w,
+								${urlImg}/${i}_375.jpg 375w`);
+
+            div.appendChild(img);
+            carousel.appendChild(div);
+        }
+    }
+   
+}
+
+export { makeCardContentTemplate, makeCartContentTemplate, makeDropDownList, createNavLink, createCarouselItems };

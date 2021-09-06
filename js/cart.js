@@ -9,57 +9,50 @@ import { catalogue } from './product_mockup.js';
 
 class Cart {
 
-    #_shoopingList;
-    #_subtotal;
-    #_shipping;
-    #_total;
-    #_minPurchase;
-    #_enable;
-
     constructor(data){
-        this.#_shoopingList = data.shoopingList || [],
-        this.#_subtotal = data.subtotal || 0.00,
-        this.#_shipping = data.shipping || 300.00,
-        this.#_total = data.total || 0.00,
-        this.#_minPurchase = data.minPurchase || 500,
-        this.#_enable = data.enable || false 
+        this._shoopingList = data.shoopingList || [],
+        this._subtotal = data.subtotal || 0.00,
+        this._shipping = data.shipping || 300.00,
+        this._total = data.total || 0.00,
+        this._minPurchase = data.minPurchase || 500,
+        this._enable = data.enable || false 
     }
 
     get total(){
-        return this.#_total;
+        return this._total;
     }
 
     get subtotal(){
-        return this.#_subtotal;
+        return this._subtotal;
     }
 
     get enable(){
-        return this.#_enable;
+        return this._enable;
     }
 
     get shoopingList() {
-        return this.#_shoopingList;
+        return this._shoopingList;
     }
 
     get shipping() {
-        return this.#_shipping;
+        return this._shipping;
     }
 
     cartSize(){
-        return this.#_shoopingList.length;
+        return this._shoopingList.length;
     }
 
     addItem(id){
         let status = false;
-        let prod = this.#findProdById(id, catalogue);
+        let prod = this.findProdById(id, catalogue);
         if(prod.stock > 0) { // there is stock
             catalogue.find(prod => prod.id === id).stockMinusOne(); // reduces stock by one unit
-            this.#_shoopingList.push(prod);
-            this.#_subtotal += prod.price;
-            if( this.#_shoopingList.length == 1){
-                this.#_total += this.#_shipping;
+            this._shoopingList.push(prod);
+            this._subtotal += prod.price;
+            if( this._shoopingList.length == 1){
+                this._total += this._shipping;
             }
-            this.#_total += prod.price 
+            this._total += prod.price 
             this.isEnable();
             status = true;
         } else { // STOCK 0
@@ -69,29 +62,29 @@ class Cart {
     }
 
     dropItem(id){
-        let idx = this.#_shoopingList.findIndex(prod => prod.id === id);
+        let idx = this._shoopingList.findIndex(prod => prod.id === id);
         if( idx >= 0) { // prod found
             catalogue.find(prod => prod.id === id).stockPlusOne(); // Increase stock by one unit
-            const removed = this.#_shoopingList.splice(idx, 1)[0];
-            this.#_subtotal -= removed.price;
-            if( this.#_shoopingList.length == 0){
-                this.#_total -= this.#_shipping;
+            const removed = this._shoopingList.splice(idx, 1)[0];
+            this._subtotal -= removed.price;
+            if( this._shoopingList.length == 0){
+                this._total -= this._shipping;
             }
-            this.#_total -= removed.price 
+            this._total -= removed.price 
             this.isEnable();
         } else { // prod not found
             console.log("No se puede sacar el producto. El producto no esta en el carro.");
         }
     }
 
-    #findProdById(id, cataloguue){
+    findProdById(id, cataloguue){
         return catalogue.find(prod => prod.id === id);
     }
 
 
     isEnable(){
-        this.#_subtotal >= this.#_minPurchase ? this.#_enable = true : this.#_enable = false;
-        return this.#_enable;
+        this._subtotal >= this._minPurchase ? this._enable = true : this._enable = false;
+        return this._enable;
     }
     
 
@@ -101,25 +94,25 @@ class Cart {
             catalogue.find(prod => prod.id === item.id).stockPlusOne();
         })
 
-        this.#_shoopingList.length = 0;
-        this.#_subtotal = 0.00;
-        this.#_shipping = 300.00;
-        this.#_total = 0.00;
-        this.#_enable = false;
+        this._shoopingList.length = 0;
+        this._subtotal = 0.00;
+        this._shipping = 300.00;
+        this._total = 0.00;
+        this._enable = false;
     }
 
     stringify(){
 
         let myShoppingList  = [];
-        this.#_shoopingList.forEach(prod => myShoppingList.push(prod.toJsonString()) );
+        this._shoopingList.forEach(prod => myShoppingList.push(prod.toJsonString()) );
 
         let mycart = {
             shoopingList: myShoppingList,
-            subtotal: this.#_subtotal,
-            shipping: this.#_shipping,
-            total: this.#_total,
-            minPurchase: this.#_minPurchase,
-            enable: this.#_enable
+            subtotal: this._subtotal,
+            shipping: this._shipping,
+            total: this._total,
+            minPurchase: this._minPurchase,
+            enable: this._enable
         }
         return mycart;
     }

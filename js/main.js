@@ -2,7 +2,7 @@
 import { catalogue, getKindsFromCatalogue } from './product_mockup.js';
 import { Cart } from './cart.js';
 import { Product } from './product.js';
-import { makeCardContentTemplate, makeCartContentTemplate, makeDropDownTemplate } from './templates.js';
+import { makeCardContentTemplate, makeCartContentTemplate, makeDropDownList, createNavLink, createCarouselItems } from './templates.js';
 
 let cart = null;
 
@@ -344,40 +344,7 @@ function search(e){
     searchValue !== ''? makeCardDeck(e.target.children[0].value): makeCardDeck();
 }
 
-/**
- * ----------------------------------------
- * Función para general los enlaces del navbar de manera dinámica.
- * ----------------------------------------
- */
 
-const makeDropDownList = () => {
-    let dropDownTemplate = ``;
-    dropDownTemplate = makeDropDownTemplate();
-    document.getElementById('navbarNavContent').innerHTML = dropDownTemplate;
-}
-
-
-/**
- * ----------------------------------------
- * Función para agregar un nav-link en el navbar
- * ----------------------------------------
- */
-
-const createNavLink = (pageName, textContent) => {
-    let li = document.createElement('li');
-    li.classList.add('nav-item');
-
-    let a = document.createElement('a');
-    a.classList.add('nav-link');
-    a.setAttribute('href', `./${pageName}.html`);
-    a.textContent = textContent;
-
-    li.appendChild(a);
-    
-    if( document.getElementById('navbarNavContent') ) {
-        document.getElementById('navbarNavContent').appendChild(li);
-    }
-}
 
 /**
  * ----------------------------------------
@@ -418,6 +385,7 @@ document.addEventListener("DOMContentLoaded", function(){
 const main = () => {
     makeDropDownList();
     createNavLink('page2', 'Ayuda');
+    createCarouselItems('./assets/img/banner', 2, 'homeCarouselInner');
     initCart();
     makeCardDeck( getFilterValueByUrlParameter() );
     makeCartContent();
