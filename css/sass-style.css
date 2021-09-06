@@ -373,6 +373,24 @@ body::-webkit-scrollbar-thumb {
 
 /**
  * ----------------------------------------
+ * SET CAROUSEL FADE TRANSITION
+ * ----------------------------------------
+ */
+.carousel-item {
+  -webkit-transition: -webkit-transform 5s ease-in-out;
+  transition: -webkit-transform 5s ease-in-out;
+  transition: transform 5s ease-in-out;
+  transition: transform 5s ease-in-out, -webkit-transform 5s ease-in-out;
+}
+
+.carousel-fade .active.carousel-item-start,
+.carousel-fade .active.carousel-item-end {
+  -webkit-transition: opacity 0s 5s;
+  transition: opacity 0s 5s;
+}
+
+/**
+ * ----------------------------------------
  * Footer - Style
  * ----------------------------------------
  */
