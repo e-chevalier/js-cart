@@ -380,7 +380,31 @@ document.addEventListener("DOMContentLoaded", function(){
             last_scroll_top = scroll_top;
         }); 
     }
-}); 
+});
+
+
+/**
+ * ----------------------------------------
+ * Evento para cambiar el tamaño del carousel de categorias en relación
+ * al tamaño de la pantalla.
+ * Screen >= a 1024px el carousel tiene 3 elementos por carousel-item.
+ * Screen < a 1024px el carousel tiene 2 elementos por carousel-item
+ * Screen < a 768px el carousel tiene 1 elementos por carousel-item
+ * ----------------------------------------
+ */
+
+const handleCarouselCategories = () => {
+    createCarouselCatagoriesItems('./assets/img/categories', getKindsFromCatalogue(), 'categoriesCarouselInner');
+}
+
+const mediaQuery1440 = window.matchMedia('(min-width: 1440px)');
+const mediaQuery1024 = window.matchMedia('(min-width: 1024px)');
+const mediaQuery768 = window.matchMedia('(min-width: 768px)');
+
+mediaQuery1440.addEventListener('change', handleCarouselCategories);
+mediaQuery1024.addEventListener('change', handleCarouselCategories);
+mediaQuery768.addEventListener('change', handleCarouselCategories);
+
 
 /**
  * ----------------------------------------

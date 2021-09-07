@@ -228,7 +228,6 @@ const createCarouselHomeItems = (urlImg, qty, carouselInnerId) => {
  * ----------------------------------------
  */
 
-
 const createCarouselCatagoriesItems = (urlImg, categNames, carouselCategInnerId) => {
 
     let carousel = document.getElementById(carouselCategInnerId);
@@ -236,35 +235,42 @@ const createCarouselCatagoriesItems = (urlImg, categNames, carouselCategInnerId)
 
     if( carousel ) {
 
+        let mod = 1; // SCREEN SIZE < 768px sm and xs
+
+        if( window.matchMedia('(min-width: 1440px)').matches ) { // SCREEN SIZE >= 1440px xxl
+            mod = 4;
+        } else if( window.matchMedia('(min-width: 1024px)').matches ) { // SCREEN SIZE >= 1024px lg
+            mod = 3;
+        } else if ( window.matchMedia('(min-width: 768px)').matches ) { // SCREEN SIZE >= 768px md
+            mod = 2;
+        }
+
         for(let i = 0; i < categNames.length; i++){
             
-            if (i == 0 || (i % 3) == 0) { // INIT CAROUSEL ITEM AND SET ITEM ACTIVE
+            if (i == 0 || (i % mod) == 0) { // INIT CAROUSEL ITEM AND SET ITEM ACTIVE
                 i == 0 ? carouselContent += `<div class="carousel-item active">`: carouselContent += `<div class="carousel-item">`;
                 carouselContent += `<div id="categories${i+1}" class="container py-3 my-3">
-                                        <div class="row justify-content-center row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-3 g-3">`;
+                                        <div class="row justify-content-center row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-3 row-cols-xxl-4 g-3">`;
             }
-               
+                
             carouselContent += `<div class="col d-flex flex-column align-items-center">
                                     <div class="card overflow-hidden justify-content-center" style="width: 18rem;  min-width: 12rem;">
                                         <img src="${urlImg}/${categNames[i]}_600x400.jpg" class="card-img-bottom" alt="${categNames[i]}_600x400.jpg">
                                         <a href="./home.html?filterValue=${categNames[i]}#cards" class="btn btn-light text-black stretched-link">${categNames[i]}</a>
                                     </div>
                                 </div>`;
-            if((i%3) == 2 ){
+            if((i%mod) == (mod-1) ){
                 carouselContent += `</div></div></div>`;
             }
         }
 
-        if((categNames.length)%3 !== 0){ // The carousel-item is open
+        if((categNames.length)%mod !== 0){ // The carousel-item is open
             carouselContent += `</div></div></div>`;
         }
-
+    
         carousel.innerHTML = carouselContent;
 
     }
-
-    
-
 }
 
 
