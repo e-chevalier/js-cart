@@ -124,6 +124,29 @@ let manisaladopelado_params = {
     stock: 76 //kg
 }
 
+let canela_params = {
+    id: 'spices00001',
+    name: "Canela",
+    price: 98, 
+    description: `La canela es una especia muy recomendada para mejorar los problemas de circulación y muy beneficiosa para las personas con diabetes, ya que ayuda a controlar los niveles de glucosa en sangre.
+    Sobre su origen existen algunos documentos chinos del año 2800 a.C. que ya hablan de la Cinnamomum Zeylanicum. Esta es una palabra de origen griego que significa madera dulce y Zeeylanicum proviene del nombre donde se cultivaba, Ceilán.`,
+    weight: 0.1,
+    discount: 20,
+    kind: 'Hierbas y Especias',
+    stock: 76 //kg
+}
+
+let albahaca_params = {
+    id: 'spices00002',
+    name: "Albahaca",
+    price: 68, 
+    description: `Dulce, fragante y aromática. El sabor de nuestra albahaca se asemeja a un ramo de flores con notas de menta y perfume. Una hierba que nos transmite toda la frescura del Mediterráneo y que no pasará desapercibida en nuestros platos.`,
+    weight: 0.025,
+    discount: 20,
+    kind: 'Hierbas y Especias',
+    stock: 76 //kg
+}
+
 
 
 
@@ -140,9 +163,12 @@ let choclo = new Product(choclo_params);
 let almendra = new Product(almendra_params);
 let castanacaju = new Product(castanacaju_params);
 let manisaladopelado =  new Product(manisaladopelado_params);
+let canela = new Product(canela_params);
+let albahaca =  new Product(albahaca_params);
 
 
-let catalogue = [naranja, manzana, pera, banana, frutilla, berenjena, brocoli, choclo, almendra,castanacaju, manisaladopelado];
+
+let catalogue = [naranja, manzana, pera, banana, frutilla, berenjena, brocoli, choclo, almendra, castanacaju, manisaladopelado, canela, albahaca];
 
 /**
  * ----------------------------------------

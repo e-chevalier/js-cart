@@ -239,7 +239,7 @@ const createCarouselCatagoriesItems = (urlImg, categNames, carouselCategInnerId)
         for(let i = 0; i < categNames.length; i++){
             
             if (i == 0 || (i % 3) == 0) { // INIT CAROUSEL ITEM AND SET ITEM ACTIVE
-                i == 0 ? carouselContent += `<div class="carousel-item active">`: `<div class="carousel-item">`;
+                i == 0 ? carouselContent += `<div class="carousel-item active">`: carouselContent += `<div class="carousel-item">`;
                 carouselContent += `<div id="categories${i+1}" class="container py-3 my-3">
                                         <div class="row justify-content-center row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-3 g-3">`;
             }
@@ -253,6 +253,10 @@ const createCarouselCatagoriesItems = (urlImg, categNames, carouselCategInnerId)
             if((i%3) == 2 ){
                 carouselContent += `</div></div></div>`;
             }
+        }
+
+        if((categNames.length)%3 !== 0){ // The carousel-item is open
+            carouselContent += `</div></div></div>`;
         }
 
         carousel.innerHTML = carouselContent;
