@@ -9,10 +9,10 @@ const makeCardContentTemplate = (filteredCatalog) => {
     filteredCatalog.forEach((prod, i) => {
 
         if ((i % 4) == 0) { // INSERT CARDDECK INIT
-            cardContent += `<div class="row row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-4 g-4">`;
+            cardContent += `<div class="row justify-content-evenly row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-4 g-4">`;
         }
         cardContent += `
-        <div class="col py-4 px-4">
+        <div class="col py-4 px-4 px-lg-2 py-lg-3">
             <div class="card h-100 mx-2">
                 <div class="card-header text-center">
                     <h5 class="card-title">${prod.name}</h5>

@@ -391,7 +391,7 @@ document.addEventListener("DOMContentLoaded", function(){
 const main = () => {
     makeDropDownList();
     createNavLink('page2', 'Ayuda');
-    createCarouselHomeItems('./assets/img/banner', 2, 'homeCarouselInner');
+    createCarouselHomeItems('./assets/img/banner', 5, 'homeCarouselInner');
     createCarouselCatagoriesItems('./assets/img/categories', getKindsFromCatalogue(), 'categoriesCarouselInner');
     initCart();
     makeCardDeck( getFilterValueByUrlParameter() );

@@ -31,7 +31,7 @@ let pera_params = {
     weight: 1,
     discount: 5,
     kind: 'Frutas',
-    stock: 100 //kg
+    stock: 66 //kg
 }
 
 let banana_params = {
@@ -42,7 +42,7 @@ let banana_params = {
     weight: 1,
     discount: 15,
     kind: 'Frutas',
-    stock: 100 //kg
+    stock: 54 //kg
 }
 
 let frutilla_params = {
@@ -50,10 +50,10 @@ let frutilla_params = {
     name: "Frutilla Camarosa",
     price: 200, 
     description: `De origen californiano (EEUU), de frutos grandes y firmes, es la más consumida en Argentina. Se la considera como la variedad de fresón más cultivada en la actualidad.`,
-    weight: 0.5,
+    weight: 1,
     discount: 20,
     kind: 'Frutas',
-    stock: 100 //kg
+    stock: 25 //kg
 }
 
 let berenjena_params = {
@@ -64,7 +64,7 @@ let berenjena_params = {
     weight: 1,
     discount: 20,
     kind: 'Verduras',
-    stock: 100 //kg
+    stock: 57 //kg
 }
 
 let brocoli_params = {
@@ -72,10 +72,10 @@ let brocoli_params = {
     name: "Brócoli",
     price: 80, 
     description: `De color verde profundo e intenso, partiendo de un tallo firme y robusto hasta una particular e inconfundible forma irregular en su copa. El brócoli llega para regalarnos un suave pero distintivo sabor que oscila entre lo amargo y lo dulce.`,
-    weight: 0.5,
+    weight: 1,
     discount: 20,
     kind: 'Verduras',
-    stock: 100 //kg
+    stock: 92 //kg
 }
 
 let choclo_params = {
@@ -83,22 +83,51 @@ let choclo_params = {
     name: "Choclo Unidad",
     price: 80, 
     description: `Inconfundibles granos color amarillo oro. Crujientes por fuera pero suaves en su interior y, al morderlos, además nos inundan de todo su dulzor tan característico. El choclo es un vegetal tanto conocido como querido por todos.`,
-    weight: 0.5,
+    weight: 1,
     discount: 20,
     kind: 'Verduras',
-    stock: 100 //kg
+    stock: 33 //kg
 }
 
 let almendra_params = {
     id: 'nuts00001',
     name: "Almendra",
-    price: 80, 
-    description: `Inconfundibles granos color amarillo oro. Crujientes por fuera pero suaves en su interior y, al morderlos, además nos inundan de todo su dulzor tan característico. El choclo es un vegetal tanto conocido como querido por todos.`,
-    weight: 0.5,
+    price: 2170, 
+    description: `Caprichosas, rebeldes y suavemente crujientes, de interior blanco cremoso y un sabor dulce peculiar. Las almendras son célebres frutos secos, conocidos por todo tipo de paladares y preparaciones.`,
+    weight: 1,
     discount: 20,
     kind: 'Frutos Secos',
-    stock: 100 //kg
+    stock: 69 //kg
 }
+
+let castanacaju_params = {
+    id: 'nuts00002',
+    name: "Castaña de Cajú",
+    price: 1800, 
+    description: `Crujientes, gustosas y exquisitas para todo momento. Las castañas de cajú son un singular fruto seco que nos ofrecen una textura y sabor único.
+    Sus usos son variados, podemos optar por consumirlas solas como un snack, combinada con otros frutos secos, o bien, utilizarla en diferentes preparaciones como panes, ensaladas, tortas o postres.`,
+    weight: 1,
+    discount: 20,
+    kind: 'Frutos Secos',
+    stock: 80 //kg
+}
+
+let manisaladopelado_params = {
+    id: 'nuts00003',
+    name: "Maní Pelado Salado",
+    price: 490, 
+    description: `El maní es el fruto seco más antojadizo, de un sabor cremoso neutro y textura crujiente pero suave. También es capaz de adoptar todo tipo de sabores que se le quiera arrojar.
+    Entero para picar, acompañando una fría cerveza y haciendo una charla más llevadera, también mezclado con otros frutos secos e incluso en ensaladas o combinado con vegetales. Es tal vez uno de los alimentos más versátiles.`,
+    weight: 1,
+    discount: 20,
+    kind: 'Frutos Secos',
+    stock: 76 //kg
+}
+
+
+
+
+
 
 let naranja = new Product(naranja_params);
 let manzana = new Product(manzana_params);
@@ -109,9 +138,11 @@ let berenjena = new Product(berenjena_params);
 let brocoli = new Product(brocoli_params);
 let choclo = new Product(choclo_params);
 let almendra = new Product(almendra_params);
+let castanacaju = new Product(castanacaju_params);
+let manisaladopelado =  new Product(manisaladopelado_params);
 
 
-let catalogue = [naranja, manzana, pera, banana, frutilla, berenjena, brocoli, choclo, almendra];
+let catalogue = [naranja, manzana, pera, banana, frutilla, berenjena, brocoli, choclo, almendra,castanacaju, manisaladopelado];
 
 /**
  * ----------------------------------------

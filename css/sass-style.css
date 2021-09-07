@@ -377,16 +377,16 @@ body::-webkit-scrollbar-thumb {
  * ----------------------------------------
  */
 .carousel-item {
-  -webkit-transition: -webkit-transform 5s ease-in-out;
-  transition: -webkit-transform 5s ease-in-out;
-  transition: transform 5s ease-in-out;
-  transition: transform 5s ease-in-out, -webkit-transform 5s ease-in-out;
+  -webkit-transition: -webkit-transform 1s ease-in-out;
+  transition: -webkit-transform 1s ease-in-out;
+  transition: transform 1s ease-in-out;
+  transition: transform 1s ease-in-out, -webkit-transform 1s ease-in-out;
 }
 
 .carousel-fade .active.carousel-item-start,
 .carousel-fade .active.carousel-item-end {
-  -webkit-transition: opacity 0s 5s;
-  transition: opacity 0s 5s;
+  -webkit-transition: opacity 0s 1s;
+  transition: opacity 0s 1s;
 }
 
 /**
