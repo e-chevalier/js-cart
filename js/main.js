@@ -19,7 +19,8 @@ let cart = null;
  * Google 
  */
 
- window.onSignIn = function onSignIn(googleUser) {
+ window.onSignIn = function onSignIn() {
+    const googleUser = gapi.auth2.getAuthInstance().currentUser.get();
     var profile = googleUser.getBasicProfile();
     console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
     console.log('Name: ' + profile.getName());
