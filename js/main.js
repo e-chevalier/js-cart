@@ -9,7 +9,7 @@ import {
     createNavLink, 
     createCarouselHomeItems,
     createCarouselCatagoriesItems  } from './templates.js';
-import {onSignIn, signOut} from './google.js';
+
 
 
 let cart = null;
@@ -19,8 +19,23 @@ let cart = null;
  * Google 
  */
 
- window.signOut = () => {signOut(); };
- window.onSignIn = () => { onSignIn(googleUser) };
+ window.onSignIn = function onSignIn(googleUser) {
+    var profile = googleUser.getBasicProfile();
+    console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+    console.log('Name: ' + profile.getName());
+    console.log('Image URL: ' + profile.getImageUrl());
+    console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+}
+
+window.signOut = function signOut() {
+  var auth2 = gapi.auth2.getAuthInstance();
+  auth2.signOut().then(function () {
+    console.log('User signed out.');
+  });
+}
+
+
+
 
 
 /**
