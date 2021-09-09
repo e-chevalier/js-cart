@@ -5,12 +5,14 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="google-signin-client_id" content="221295695663-k26dc2qet8vg6eslb328i20l84dltn5b.apps.googleusercontent.com">
 	<link href="./assets/Awesome/css/all.min.css" rel="stylesheet">
+	<script src="https://apis.google.com/js/platform.js" async defer></script>
 	<!-- Bootstrap CSS -->
 	<link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="./css/animate.min.css">
 	<link rel="stylesheet" href="/css/sass-style.min.css">
-	<title>Clase 9 extra js Coder</title>
+	<title>Clase 12 js Coder</title>
 </head>
 
 <body>
@@ -44,11 +46,10 @@
 					<ul id="navbarNavContent" class="navbar-nav me-auto mb-2 mb-lg-0">
 						<!-- CONTENIDO GENERADO DE MANERA DINAMICA DESDE JS -->
 					</ul>
-					<form id="formSearch" class="d-flex">
-						<input id="search" class="form-control me-2" type="search" placeholder="Search"
-							aria-label="Search">
-						<button class="btn btn-outline-success" type="submit">Search</button>
-					</form>
+					<div class="d-flex">
+						<div class="g-signin2" data-onsuccess="onSignIn"></div>
+						<button type="button" class="btn btn-outline-success mx-2" onclick="signOut();">Sign Out</button>
+					</div>
 				</div>
 			</div>
 		</nav>

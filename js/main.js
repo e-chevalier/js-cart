@@ -9,8 +9,19 @@ import {
     createNavLink, 
     createCarouselHomeItems,
     createCarouselCatagoriesItems  } from './templates.js';
+import {onSignIn, signOut} from './google.js';
+
 
 let cart = null;
+
+
+/**
+ * Google 
+ */
+
+ window.signOut = () => {signOut(); };
+ window.onSignIn = () => { onSignIn() };
+
 
 /**
  * ----------------------------------------
@@ -341,7 +352,7 @@ window.makeCardDeck = (filterValue) => makeCardDeck(filterValue);
  * ----------------------------------------
  */
 
-let formSearch = document.getElementById('formSearch');
+/*let formSearch = document.getElementById('formSearch');
 formSearch.addEventListener('submit', search);
 
 function search(e){
@@ -349,7 +360,7 @@ function search(e){
     let searchValue = e.target.children[0].value;
     searchValue !== ''? makeCardDeck(e.target.children[0].value): makeCardDeck();
 }
-
+*/
 
 
 /**
