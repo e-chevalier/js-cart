@@ -20,7 +20,7 @@ let cart = null;
  */
 
  window.signOut = () => {signOut(); };
- window.onSignIn = () => { onSignIn() };
+ window.onSignIn = () => { onSignIn(googleUser) };
 
 
 /**
