@@ -26,6 +26,10 @@ let cart = null;
     console.log('Name: ' + profile.getName());
     console.log('Image URL: ' + profile.getImageUrl());
     console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+    document.getElementById('userName').style.visibility = "visible";
+    document.getElementById('userName').innerHTML = `<i class="far fa-user"><span class="px-3 roboto-regular">${profile.getName()}</span></i>`;
+    document.getElementById('g-signin2').style.visibility = "hidden";  
+
 }
 
 window.signOut = function signOut() {
@@ -33,6 +37,8 @@ window.signOut = function signOut() {
   auth2.signOut().then(function () {
     console.log('User signed out.');
   });
+  document.getElementById('g-signin2').style.visibility = "visible";
+  document.getElementById('userName').style.visibility = "hidden";
 }
 
 
