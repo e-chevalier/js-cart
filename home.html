@@ -48,10 +48,10 @@
 					<ul id="navbarNavContent" class="navbar-nav me-auto mb-2 mb-lg-0">
 						<!-- CONTENIDO GENERADO DE MANERA DINAMICA DESDE JS -->
 					</ul>
-					<div class="d-flex">
-						<div id="userName"></div>
-						<div id="g-signin2" class="g-signin2" data-onsuccess="onSignIn"></div>
-						<button type="button" class="btn btn-outline-success mx-2" onclick="signOut();">Sign Out</button>
+					<div class="d-flex flex-row">
+						<div id="g-signin2" class="g-signin2 col-6" data-onsuccess="onSignIn"></div>
+						<div id="userName" class="col-6" ></div>
+						<button id="signOut" type="button" class="col-6 btn btn-outline-success mx-2" onclick="signOut();" hidden>Sign Out</button>
 					</div>
 				</div>
 			</div>

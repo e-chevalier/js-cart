@@ -28,6 +28,7 @@ let cart = null;
     console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
     document.getElementById('userName').style.visibility = "visible";
     document.getElementById('userName').innerHTML = `<i class="far fa-user"><span class="px-3 roboto-regular">${profile.getName()}</span></i>`;
+    document.getElementById('signOut').style.visibility = "visible";
     document.getElementById('g-signin2').style.visibility = "hidden";  
 
 }
@@ -39,6 +40,7 @@ window.signOut = function signOut() {
   });
   document.getElementById('g-signin2').style.visibility = "visible";
   document.getElementById('userName').style.visibility = "hidden";
+  document.getElementById('signOut').style.visibility = "hidden";
 }
 
 
