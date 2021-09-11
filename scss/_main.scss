@@ -10,7 +10,7 @@
 }
 
 /*** Remove focus for button, input, select, a ***/
-button, input, select, a{
+button, input, select, a, textarea{
     &:focus, &:focus-visible{
         outline: none !important;
         box-shadow: none !important;

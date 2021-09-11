@@ -447,7 +447,7 @@ mediaQuery768.addEventListener('change', handleCarouselCategories);
 
 const main = () => {
     makeDropDownList();
-    createNavLink('page2', 'Ayuda');
+    createNavLink('contact', 'Contacto');
     createCarouselHomeItems('./assets/img/banner', 5, 'homeCarouselInner');
     createCarouselCatagoriesItems('./assets/img/categories', getKindsFromCatalogue(), 'categoriesCarouselInner');
     initCart();
