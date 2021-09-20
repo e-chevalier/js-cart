@@ -1,7 +1,5 @@
 "use strict";
-
 import { catalogue, getKindsFromCatalogue } from "./product_mockup.js";
-console.log(catalogue);
 
 const makeCardContentTemplate = (filteredCatalog) => {
     

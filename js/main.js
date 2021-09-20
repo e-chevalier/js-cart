@@ -14,7 +14,6 @@ import {
 
 let cart = null;
 
-console.log(catalogue);
 
 /**
  * Google 
@@ -394,14 +393,19 @@ function search(e){
 */
 
 
+// A $( document ).ready() block.
+$( document ).ready(function() {
+    console.log( "ready!" );
+});
+
 /**
  * ----------------------------------------
  * Evento para autohide del navbar
  * ----------------------------------------
  */
 
-document.addEventListener("DOMContentLoaded", function(){
-		
+const autoHideNavBar = () => {
+
     let e = document.querySelector('.autohide');
 
     let navbar_height = document.querySelector('.navbar').offsetHeight;
@@ -410,8 +414,8 @@ document.addEventListener("DOMContentLoaded", function(){
     if(e){
         let last_scroll_top = 0;
         window.addEventListener('scroll', function() {
-               let scroll_top = window.scrollY;
-           if(scroll_top < last_scroll_top) {
+            let scroll_top = window.scrollY;
+            if(scroll_top < last_scroll_top) {
                 e.classList.remove('scrolled-down');
                 e.classList.add('scrolled-up');
             }
@@ -422,8 +426,10 @@ document.addEventListener("DOMContentLoaded", function(){
             last_scroll_top = scroll_top;
         }); 
     }
-});
+}
 
+
+ 
 
 /**
  * ----------------------------------------
@@ -463,6 +469,7 @@ const main = () => {
     initCart();
     makeCardDeck( getFilterValueByUrlParameter() );
     makeCartContent();
+    autoHideNavBar();
 }
 
 main();
