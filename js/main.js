@@ -14,6 +14,7 @@ import {
 
 let cart = null;
 
+console.log(catalogue);
 
 /**
  * Google 
@@ -454,6 +455,7 @@ mediaQuery768.addEventListener('change', handleCarouselCategories);
  */
 
 const main = () => {
+
     makeDropDownList();
     createNavLink('contact', 'Contacto');
     createCarouselHomeItems('./assets/img/banner', 5, 'homeCarouselInner');

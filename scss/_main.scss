@@ -96,6 +96,15 @@ body::-webkit-scrollbar-thumb {
     color: black;
 }
 
+/**
+ * ----------------------------------------
+ * Header - style
+ * ----------------------------------------
+ */
+
+header {
+    height: 122px;
+}
 
 /**
  * ----------------------------------------
@@ -179,6 +188,18 @@ body::-webkit-scrollbar-thumb {
 .bg-red {
     background-color: crimson !important;
 }
+
+/**
+ * ----------------------------------------
+ * SET SQUARE BUTTON FOR CARDs
+ * ----------------------------------------
+ */
+
+ .square-button{
+    width: 3em;
+    height: 3em;
+}
+
 
 /**
  * ----------------------------------------

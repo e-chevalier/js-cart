@@ -1,6 +1,21 @@
 "use strict";
 import { Product } from './product.js';
 
+let catalogue = [];
+
+await fetch('./js/products.json').then(
+    response => response.json()
+).then( 
+    data => {
+        data.products.forEach( e => {
+            catalogue.push( new Product(e));
+        } );
+    }
+);
+
+//console.log(catalogue);
+
+/*
 let naranja_params = {
     id: 'fruit00001',
     name: "Naranja de Ombligo",
@@ -147,11 +162,6 @@ let albahaca_params = {
     stock: 76 //kg
 }
 
-
-
-
-
-
 let naranja = new Product(naranja_params);
 let manzana = new Product(manzana_params);
 let pera = new Product(pera_params);
@@ -169,7 +179,7 @@ let albahaca =  new Product(albahaca_params);
 
 
 let catalogue = [naranja, manzana, pera, banana, frutilla, berenjena, brocoli, choclo, almendra, castanacaju, manisaladopelado, canela, albahaca];
-
+*/
 /**
  * ----------------------------------------
  * Función que retorna un array con los valores de la propiedad

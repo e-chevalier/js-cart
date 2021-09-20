@@ -6,7 +6,8 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link href="./assets/Awesome/css/all.min.css" rel="stylesheet">
-	<meta name="google-signin-client_id" content="221295695663-k26dc2qet8vg6eslb328i20l84dltn5b.apps.googleusercontent.com">
+	<meta name="google-signin-client_id"
+		content="221295695663-k26dc2qet8vg6eslb328i20l84dltn5b.apps.googleusercontent.com">
 	<script src="https://apis.google.com/js/platform.js" async defer></script>
 	<!-- Bootstrap CSS -->
 	<link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
@@ -18,45 +19,49 @@
 </head>
 
 <body>
-	<div class="container-fluid p-0">
-		<!-- HEADER -->
-		<nav class="autohide navbar navbar-expand-lg navbar-light bg-light navbar-custom">
-			<div class="container-fluid">
-				<a class="navbar-brand navbar-custom__brand" href="./home.html?filterValue=all">
-					<img class="wow animate__animated animate__zoomIn animate__faster animate__delay-1s"
-						src="assets/icons/logo_small.png" alt="Mi Logo">
-				</a>
-				<div class="navbar-text d-flex justify-content-between text-right order-lg-1 px-md-4">
-					<a name="Cart" id="Cart" onclick="makeCartContent();return false;"
-						class="btn btn-light position-relative" data-bs-toggle="offcanvas" href="#offcanvasCart"
-						role="button" aria-controls="offcanvasCart">
-						<span class="fa-layers fa-fw">
-							<i class="fas fa-shopping-cart fa-lg"></i>
-							<span id="cartCounter"
-								class="position-absolute top-0 start-100 translate-middle badge bg-success"></span>
-						</span>
-					</a>
 
-					<button class="navbar-toggler border-0 ps-4 navbar-custom__toogler" type="button"
-						data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-						aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-						<i class="fas fa-bars"></i>
-					</button>
-				</div>
-				<div class="collapse navbar-collapse navbar-custom__link navbar-custom__link--colorHover"
-					id="navbarSupportedContent">
-					<ul id="navbarNavContent" class="navbar-nav me-auto mb-2 mb-lg-0">
-						<!-- CONTENIDO GENERADO DE MANERA DINAMICA DESDE JS -->
-					</ul>
-					<div class="d-flex flex-row align-items-center">
-						<div id="g-signin2" class="g-signin2 col-6" data-onsuccess="onSignIn"></div>
-						<div id="userName" class="col-8 d-none" ></div>
-						<button id="signOut" type="button" class="col-4 btn btn-outline-success mx-2 d-none" onclick="signOut();">Sign Out</button>
+	<header>
+		<div class="container-fluid p-0">
+			<!-- HEADER -->
+			<nav class="autohide navbar navbar-expand-lg navbar-light bg-light navbar-custom">
+				<div class="container-fluid">
+					<a class="navbar-brand navbar-custom__brand" href="./home.html?filterValue=all">
+						<img class="wow animate__animated animate__zoomIn animate__faster animate__delay-1s"
+							src="assets/icons/logo_small.png" alt="Mi Logo">
+					</a>
+					<div class="navbar-text d-flex justify-content-between text-right order-lg-1 px-md-4">
+						<a name="Cart" id="Cart" onclick="makeCartContent();return false;"
+							class="btn btn-light position-relative" data-bs-toggle="offcanvas" href="#offcanvasCart"
+							role="button" aria-controls="offcanvasCart">
+							<span class="fa-layers fa-fw">
+								<i class="fas fa-shopping-cart fa-lg"></i>
+								<span id="cartCounter"
+									class="position-absolute top-0 start-100 translate-middle badge bg-success"></span>
+							</span>
+						</a>
+
+						<button class="navbar-toggler border-0 ps-4 navbar-custom__toogler" type="button"
+							data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+							aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+							<i class="fas fa-bars"></i>
+						</button>
+					</div>
+					<div class="collapse navbar-collapse navbar-custom__link navbar-custom__link--colorHover"
+						id="navbarSupportedContent">
+						<ul id="navbarNavContent" class="navbar-nav me-auto mb-2 mb-lg-0">
+							<!-- CONTENIDO GENERADO DE MANERA DINAMICA DESDE JS -->
+						</ul>
+						<div class="d-flex flex-row align-items-center">
+							<div id="g-signin2" class="g-signin2 col-6" data-onsuccess="onSignIn"></div>
+							<div id="userName" class="col-8 d-none"></div>
+							<button id="signOut" type="button" class="col-4 btn btn-outline-success mx-2 d-none"
+								onclick="signOut();">Sign Out</button>
+						</div>
 					</div>
 				</div>
-			</div>
-		</nav>
-	</div>
+			</nav>
+		</div>
+	</header>
 
 	<div id="homeCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-touch="false"
 		data-bs-keyboard="false" data-bs-pause="false">
@@ -72,14 +77,14 @@
 		<button class="carousel-control-prev" type="button" data-bs-target="#categoriesCarousel" data-bs-slide="prev">
 			<span class="carousel-control-prev-icon" aria-hidden="true"></span>
 			<span class="visually-hidden">Previous</span>
-		  </button>
-		  <button class="carousel-control-next" type="button" data-bs-target="#categoriesCarousel" data-bs-slide="next">
+		</button>
+		<button class="carousel-control-next" type="button" data-bs-target="#categoriesCarousel" data-bs-slide="next">
 			<span class="carousel-control-next-icon" aria-hidden="true"></span>
 			<span class="visually-hidden">Next</span>
-		  </button>
+		</button>
 	</div>
 
-	
+
 
 
 	<div>
