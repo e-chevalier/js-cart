@@ -18,7 +18,7 @@ const makeCardContentTemplate = (filteredCatalog) => {
                 </div>
                 <div class="row h-100 g-0 pt-3">
                     <div class="col-6">
-                        <img class="card-img-top" src="/assets/img/product/${prod.id}.jpg" alt="">
+                        <img id="img-${prod.id}" class="card-img-top" src="/assets/img/product/${prod.id}.jpg" alt="">
                     </div>
                     <div class="col-6">
                         <div class="card-body font-black">     

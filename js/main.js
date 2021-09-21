@@ -26,12 +26,10 @@ let cart = null;
     console.log('Name: ' + profile.getName());
     console.log('Image URL: ' + profile.getImageUrl());
     console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
-    //document.getElementById('userName').style.visibility = "visible";
+  
     document.getElementById('userName').classList.toggle('d-none');
     document.getElementById('userName').innerHTML = `<i class="far fa-user"><span class="px-3 roboto-regular">${profile.getName()}</span></i>`;
-    //document.getElementById('signOut').style.visibility = "visible";
-    document.getElementById('signOut').classList.toggle('d-none');
-    //document.getElementById('g-signin2').style.visibility = "hidden";  
+    document.getElementById('signOut').classList.toggle('d-none'); 
     document.getElementById('g-signin2').classList.toggle('d-none');
 
 }
@@ -41,9 +39,6 @@ window.signOut = function signOut() {
   auth2.signOut().then(function () {
     console.log('User signed out.');
   });
-  //document.getElementById('g-signin2').style.visibility = "visible";
-  //document.getElementById('userName').style.visibility = "hidden";
-  //document.getElementById('signOut').style.visibility = "hidden";
   document.getElementById('g-signin2').classList.toggle('d-none');
   document.getElementById('userName').classList.toggle('d-none');
   document.getElementById('signOut').classList.toggle('d-none');
@@ -138,13 +133,15 @@ const setStockCounter = (prodId) => {
         // stock badge is red and stock > 0
         if (actualStock > 0 && document.getElementById(id).classList.contains('bg-red')) {
             document.getElementById(id).classList.replace('bg-red', 'bg-green');
-            document.getElementById('addButton-'+prodId).style.visibility = "visible";     
+            document.getElementById('addButton-'+prodId).style.visibility = "visible";
+            $('#img-'+prodId).css('filter', 'grayscale(0)');     
         }
 
         // stock is 0 and badge is gray 
         if (actualStock == 0 && document.getElementById(id).classList.contains('bg-green')) {
             document.getElementById(id).classList.replace('bg-green', 'bg-red');
             document.getElementById('addButton-'+prodId).style.visibility = "hidden";
+            $('#img-'+prodId).css('filter', 'grayscale(1)');
         }
     }
 }
