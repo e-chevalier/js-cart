@@ -119,6 +119,27 @@ const setCartCounter = () => {
 
 
 /**
+ * 
+ * @param {*} id 
+ */
+ const elementWithAnimation = (id, visibility) => {
+    
+    if ( visibility == 'visible' ) {
+        $('#addButton-'+id).animate({ fontSize: '1rem' },500, 'linear', () => { $('#addButton-'+id).css('visibility', visibility).toggleClass('rotate-90')} )
+                 .animate({ opacity: 1 }, 500, 'linear', () => {$('#'+id).toggleClass('rotate-90')});
+        $('#img-'+id).css('filter', 'grayscale(0)');  
+                
+    } else {
+        $('#addButton-'+id).toggleClass('rotate-90')
+            .animate({ opacity: 0 }, 500, 'linear', () => {$('#addButton-'+id).css('visibility', visibility).toggleClass('rotate-90')})
+            .animate({ fontSize: '0rem' },500, 'linear', () => {} );
+        $('#img-'+id).css('filter', 'grayscale(1)');
+
+    }
+    
+}
+
+/**
  * ----------------------------------------
  * Función para modificar el contador del stock
  * ----------------------------------------
@@ -133,15 +154,17 @@ const setStockCounter = (prodId) => {
         // stock badge is red and stock > 0
         if (actualStock > 0 && document.getElementById(id).classList.contains('bg-red')) {
             document.getElementById(id).classList.replace('bg-red', 'bg-green');
-            document.getElementById('addButton-'+prodId).style.visibility = "visible";
-            $('#img-'+prodId).css('filter', 'grayscale(0)');     
+            //document.getElementById('addButton-'+prodId).style.visibility = "visible";
+            //$('#img-'+prodId).css('filter', 'grayscale(0)');
+            elementWithAnimation( prodId, 'visible');                 
         }
 
         // stock is 0 and badge is gray 
         if (actualStock == 0 && document.getElementById(id).classList.contains('bg-green')) {
             document.getElementById(id).classList.replace('bg-green', 'bg-red');
-            document.getElementById('addButton-'+prodId).style.visibility = "hidden";
-            $('#img-'+prodId).css('filter', 'grayscale(1)');
+            //document.getElementById('addButton-'+prodId).style.visibility = "hidden";
+            //$('#img-'+prodId).css('filter', 'grayscale(1)');
+            elementWithAnimation( prodId, 'hidden');
         }
     }
 }
@@ -373,27 +396,6 @@ window.makeCartContent = () => makeCartContent();
 window.makeCardDeck = (filterValue) => makeCardDeck(filterValue);
 
 
-/**
- * ----------------------------------------
- * FormSearch  - Se agrega evento submit para realizar la busqueda.
- * ----------------------------------------
- */
-
-/*let formSearch = document.getElementById('formSearch');
-formSearch.addEventListener('submit', search);
-
-function search(e){
-    e.preventDefault();
-    let searchValue = e.target.children[0].value;
-    searchValue !== ''? makeCardDeck(e.target.children[0].value): makeCardDeck();
-}
-*/
-
-
-// A $( document ).ready() block.
-$( document ).ready(function() {
-    console.log( "ready!" );
-});
 
 /**
  * ----------------------------------------
