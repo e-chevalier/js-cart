@@ -126,7 +126,7 @@ const setCartCounter = () => {
     
     if ( visibility == 'visible' ) {
         $('#addButton-'+id).animate({ fontSize: '1rem' },500, 'linear', () => { $('#addButton-'+id).css('visibility', visibility).toggleClass('rotate-90')} )
-                 .animate({ opacity: 1 }, 500, 'linear', () => {$('#'+id).toggleClass('rotate-90')});
+                 .animate({ opacity: 1 }, 500, 'linear', () => {$('#addButton-'+id).toggleClass('rotate-90')});
         $('#img-'+id).css('filter', 'grayscale(0)');  
                 
     } else {
