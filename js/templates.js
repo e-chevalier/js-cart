@@ -72,47 +72,49 @@ const makeCardContentTemplate = (filteredCatalog) => {
 
 const makeCartContentTemplate = (catalogue, myShoopingList) => {
     let cartContent = ``;
+    const copyMyShoopingList = [...myShoopingList];
+    copyMyShoopingList.reverse();
 
-    catalogue.forEach((prod, i) => {
+    copyMyShoopingList.forEach((prod, i) => {
 
-        let qty = myShoopingList.filter(art => art.id === prod.id).length;
-        if (qty > 0) {
-            cartContent += `
-                <div class="card mb-3">
-                    <div class="row g-0">
-                        <div class="col-4">
-                            <img src="./assets/img/product/${prod.id}.jpg" class="img-fluid rounded-start" alt="${prod.id}">
-                        </div>
-                        <div class="col-8">
-                            <div class="card-body">
-                                <h5 class="card-title">${prod.name}</h5>
-                                <p class="card-text">
-                                    <p>Precio por kg : $${prod.price}</p>
-                                    <p>Cantidad solicitada: <span class="fw-bold">${qty} kg</span></p>
-                                    <p><span class="fw-bold">Subtotal : $${qty * prod.price}</span></p>
-                                </p>
-                            </div>
-                        </div>
+        let qty = prod.qty;
+        
+        cartContent += `
+            <div class="card mb-3">
+                <div class="row g-0">
+                    <div class="col-4">
+                        <img src="./assets/img/product/${prod.id}.jpg" class="img-fluid rounded-start" alt="${prod.id}">
                     </div>
-                    <div class="row g-0">
-                        <p class="card-text">
-                        <div class="d-flex flex-row justify-content-around align-items-center">
-                            <button id="takeoutButtonCart-${prod.id}" type="button" class="btn btn-outline-danger rounded-circle border-0 square-button" 
-                            onclick="takeOutOfCart('${prod.id}');return false;">
-                                <i class="fas fa-minus"></i>
-                            </button>
-                            <div> <span class="badge bg-light text-success fs-6">Stock ${prod.stock} Kg</span>
-                            </div>
-                            <button id="addButtonCart-${prod.id}" type="button" class="btn btn-outline-success rounded-circle border-0 square-button" 
-                            onclick="addToCart('${prod.id}');return false;">
-                                <i class="fas fa-plus"></i>
-                            </button>
+                    <div class="col-8">
+                        <div class="card-body">
+                            <h5 class="card-title">${prod.name}</h5>
+                            <p class="card-text">
+                                <p>Precio por kg : $${prod.price}</p>
+                                <p>Cantidad solicitada: <span class="fw-bold">${qty} kg</span></p>
+                                <p><span class="fw-bold">Subtotal : $${qty * prod.price}</span></p>
+                            </p>
                         </div>
-                        </p>
                     </div>
                 </div>
-            `;
-        }
+                <div class="row g-0">
+                    <p class="card-text">
+                    <div class="d-flex flex-row justify-content-around align-items-center">
+                        <button id="takeoutButtonCart-${prod.id}" type="button" class="btn btn-outline-danger rounded-circle border-0 square-button" 
+                        onclick="takeOutOfCart('${prod.id}');return false;">
+                            <i class="fas fa-minus"></i>
+                        </button>
+                        <div> <span class="badge bg-light text-success fs-6">Stock ${prod.stock} Kg</span>
+                        </div>
+                        <button id="addButtonCart-${prod.id}" type="button" class="btn btn-outline-success rounded-circle border-0 square-button" 
+                        onclick="addToCart('${prod.id}');return false;">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </div>
+                    </p>
+                </div>
+            </div>
+        `;
+        
     });
 
     return cartContent;

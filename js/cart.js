@@ -39,7 +39,11 @@ class Cart {
     }
 
     cartSize(){
-        return this._shoopingList.length;
+
+        let count = 0;
+        this._shoopingList.forEach(prod => count += prod.qty);
+
+        return count;
     }
 
     addItem(id){
@@ -47,14 +51,19 @@ class Cart {
         let prod = this.findProdById(id, catalogue);
         if(prod.stock > 0) { // there is stock
             catalogue.find(prod => prod.id === id).stockMinusOne(); // reduces stock by one unit
-            this._shoopingList.push(prod);
-            this._subtotal += prod.price;
-            if( this._shoopingList.length == 1){
-                this._total += this._shipping;
+           
+            let idx = this._shoopingList.findIndex(prod => prod.id === id);
+            if( idx >= 0) { // Prod Found on Cart
+                this._shoopingList[idx].qtyPlusOne();
+            } else { // Prod not found on Cart
+                prod.qtyPlusOne();
+                this._shoopingList.push(prod);
             }
-            this._total += prod.price 
-            this.isEnable();
+
+            this.updateTotals('addItem', id);
+          
             status = true;
+
         } else { // STOCK 0
             console.log(`No queda stock de ${prod.name}.`);
         }
@@ -65,22 +74,56 @@ class Cart {
         let idx = this._shoopingList.findIndex(prod => prod.id === id);
         if( idx >= 0) { // prod found
             catalogue.find(prod => prod.id === id).stockPlusOne(); // Increase stock by one unit
-            const removed = this._shoopingList.splice(idx, 1)[0];
-            this._subtotal -= removed.price;
-            if( this._shoopingList.length == 0){
-                this._total -= this._shipping;
+
+            if (this._shoopingList[idx].qty > 1) { // More than One
+                this._shoopingList[idx].qtyMinusOne();
+            } else {
+                this._shoopingList[idx].qtyMinusOne();
+                this._shoopingList.splice(idx, 1)[0];
             }
-            this._total -= removed.price 
-            this.isEnable();
+
+            this.updateTotals('dropItem', id);
+         
         } else { // prod not found
             console.log("No se puede sacar el producto. El producto no esta en el carro.");
         }
     }
 
-    findProdById(id, cataloguue){
+    updateTotals(command , prodId) {
+
+        let prod = this.findProdById(prodId, catalogue);        
+        
+        switch (command) {
+            case 'addItem':
+                this._subtotal += prod.price;
+                if( this.cartSize() == 1){ // Add the shipping cost only once 
+                    this._total += this._shipping;
+                }
+                this._total += prod.price 
+                this.isEnable(); //controls if the minimum purchase was reached 
+                break;
+            case 'dropItem':
+                this._subtotal -= prod.price;
+                if( this.cartSize() == 0){
+                    this._total -= this._shipping;
+                }
+                this._total -= prod.price 
+                this.isEnable();
+                break;
+            default:
+                break;
+        }
+
+    }
+
+    findProdById(id, catalogue){
         return catalogue.find(prod => prod.id === id);
     }
 
+    /**
+     * Function: Controls if the minimum purchase was reached 
+     * @returns 
+     */
 
     isEnable(){
         this._subtotal >= this._minPurchase ? this._enable = true : this._enable = false;

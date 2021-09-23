@@ -16,6 +16,7 @@ class Product {
         this._discount = prod.discount || 0;
         this._kind = prod.kind || 'wrongkind'
         this._stock = prod.stock || 0;
+        this._qty = prod.qty || 0;
     }
 
     /**  Getters for private attributes **/
@@ -56,6 +57,10 @@ class Product {
         return this._kind;
     }
 
+    get qty(){
+        return this._qty;
+    }
+
     /**  Setters for private attributes **/
 
     /*** Set the stock in qty units ***/
@@ -68,7 +73,15 @@ class Product {
     }
 
     stockMinusOne(){
-        this._stock >= 1 ? this._stock -= 1 : console.log(`Stock de ${this._name}: ${this._stock}, menor a ${1}.`);
+        this._stock >= 1 ? this._stock -= 1 : console.log(`Stock de ${this._name}: ${this._stock}, menor a 1.`);
+    }
+
+    qtyPlusOne(){
+        this._qty += 1;
+    }
+
+    qtyMinusOne(){
+        this._qty >= 1 ? this._qty -= 1 : console.log(`QTY de ${this._name}: ${this._qty}, menor a 1.`);
     }
 
     /* Consulta si el producto tiene descuento en el precio.
@@ -87,6 +100,7 @@ class Product {
             discount: this._discount,
             kind: this._kind,
             stock: this._stock,
+            qty: this._qty
         };
         return json;
     }

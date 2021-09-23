@@ -101,8 +101,12 @@ const updateRemainingStock = () => {
 
     catalogue.forEach((prod, index) => {
         // Obtengo la cantidad de productos que tengo en el carro con un ID determinado.
-        let qty = cart.shoopingList.filter(elem => elem.id === prod.id).length;
-        catalogue[index].reduceStock(qty);
+        let res = cart.shoopingList.filter(elem => elem.id === prod.id);
+
+        if ( res.length > 0) { // Prod present on the cart
+            catalogue[index].reduceStock(res[0].qty);
+        }
+
     })
 
 }
@@ -146,7 +150,7 @@ const setCartCounter = () => {
  */
 const setStockCounter = (prodId) => {
     
-    let id = 'stock-' + prodId;
+    let id = 'stock-'+prodId;
     let actualStock = catalogue.find(prod => prod.id == prodId).stock;
     if( document.getElementById(id) ) {  // DOM ELEMENT IS PRESENT
         document.getElementById(id).innerHTML = 'Stock ' + actualStock + ' Kg';
@@ -196,8 +200,7 @@ const setAddButtonCardVisibility = (prodId) => {
 const initCart = () => {
 
     if (localStorage.getItem('cart')) { // Found in localStorage
-        let mycart = JSON.parse(localStorage.getItem('cart'))
-        cart = getCartFromLocalStorage();
+        cart = getCartFromLocalStorage(); // SET GLOBAL CART
         updateRemainingStock();
     } else { // Not Found in localStorage
         cart = new Cart({});
@@ -278,10 +281,10 @@ const updateProdQty = (prodId) => {
     let id = 'prodQty-'+prodId;
 
     if( document.getElementById(id) ) {  // DOM ELEMENT IS PRESENT
-        const myShoopingList = cart.shoopingList;
-        let qty = myShoopingList.filter(prod => prod.id === prodId).length;
-        if (qty > 0) {
-            document.getElementById(id).innerHTML = qty + 'Kg';
+        const res = cart.shoopingList.filter(prod => prod.id === prodId);
+        
+        if (res.length > 0) {
+            document.getElementById(id).innerHTML = res[0].qty + 'Kg';
             document.getElementById(id).style.visibility = "visible";
         } else {
             document.getElementById(id).style.visibility = "hidden";
