@@ -36,10 +36,24 @@ const MYHEADERS = new Headers(
  * @param {*} shoopingList 
  */
 
-const makeCheckOut = (shoopingList) => {
+const makeCheckOut = async (shoopingList) => {
 
     let prodsMercadoPago = cartToMP(shoopingList);
-    let data = { "items": prodsMercadoPago};
+
+    let data = { "items": prodsMercadoPago,
+                "payer": {
+                    "name": "Esteban",
+                    "surname": "Chevalier",
+                    "email": "esteban@gmail.com",
+                    "phone": {"area_code": "351",
+                              "number": "2412907"},
+                    "identification": {},
+                    "address": {"zip_code": 5000,
+                    "street_name": "FRANCISCO QUEVEDO",
+                    "street_number": 1000
+                    }
+                }
+            };
 
     let myInit = { method: 'POST',
                headers: MYHEADERS,
@@ -51,7 +65,8 @@ const makeCheckOut = (shoopingList) => {
     fetch(myRequest).then( 
         response => response.json()
     ).then(
-        data => console.log(data)
+        //data => console.log(data.init_point)
+        data => window.location.replace(data.init_point)
     );
 }
 
