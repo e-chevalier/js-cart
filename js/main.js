@@ -57,12 +57,10 @@ window.signOut = function signOut() {
 const infoCart = () => {
 
     const myShoopingList = cart.shoopingList;
-    catalogue.forEach(art => {
-        let qty = myShoopingList.filter(prod => prod.id === art.id).length;
-        if (qty > 0) {
-            console.log(`+ ${art.name} - ${qty}Kg -- $${qty * art.price} -`);
-            console.log(`Stock actual: ` + art.stock);
-        }
+  
+    myShoopingList.forEach( art => {
+        console.log(`+ ${art.name} - ${art.qty}Kg -- $${art.qty * art.price} -`);
+        console.log(`Stock actual: ` + art.stock);
     });
 
     console.log("SUBTOTAL: " + cart.subtotal);
