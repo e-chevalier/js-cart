@@ -10,10 +10,10 @@ import {
     createCarouselHomeItems,
     createCarouselCatagoriesItems  } from './templates.js';
 
+import { makeCheckOut } from './mercadopago.js'
 
 
 let cart = null;
-
 
 /**
  * Google 
@@ -191,6 +191,12 @@ const setAddButtonCardVisibility = (prodId) => {
     }
 }
 
+
+function makeCheckOutMP() {
+    console.log("Calling checkout")
+    makeCheckOut(cart.shoopingList);
+}
+
 /**
  * ----------------------------------------
  * Inicializado del carro.
@@ -207,6 +213,9 @@ const initCart = () => {
         localStorage.setItem('cart', JSON.stringify(cart.stringify()));
     }
     setCartCounter();
+
+    // AGREGAMOS EL EVENTO CLICK PARA REALIZAR EL CHECKOUT
+    document.getElementById('checkout').addEventListener('click', makeCheckOutMP);
 }
 
 /**
@@ -380,13 +389,15 @@ const makeCardDeck = (filterValue) => {
 
 const makeCartContent = () => {
     let cartContent = ``;
-    const myShoopingList = cart.shoopingList;
+    let myShoopingList = cart.shoopingList;
 
     document.getElementById('total').innerHTML = "TOTAL $"+ cart.total;
     document.getElementById('subtotal').innerHTML = "Subtotal: $" + cart.subtotal;
     document.getElementById('envio').innerHTML = "Envio   : $" + cart.shipping;
 
-    cartContent = makeCartContentTemplate( catalogue, myShoopingList);
+    cart.isEnable() ? document.getElementById('checkout').disabled = false : document.getElementById('checkout').disabled = true;
+
+    cartContent = makeCartContentTemplate( myShoopingList);
    
     document.getElementById('cartContent').innerHTML = cartContent;
 

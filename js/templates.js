@@ -70,8 +70,9 @@ const makeCardContentTemplate = (filteredCatalog) => {
 }
 
 
-const makeCartContentTemplate = (catalogue, myShoopingList) => {
+const makeCartContentTemplate = (myShoopingList) => {
     let cartContent = ``;
+
     const copyMyShoopingList = [...myShoopingList];
     copyMyShoopingList.reverse();
 

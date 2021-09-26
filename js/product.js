@@ -9,7 +9,7 @@ class Product {
    
     constructor(prod){
         this._id = prod.id || 999999;
-        this._name = prod.name || newproduct;
+        this._name = prod.name || 'newproduct';
         this._price = prod.price || 0;
         this._description = prod.description || 'empty';
         this._weight = prod.weight || 1; 
