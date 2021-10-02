@@ -66,7 +66,7 @@ const makeCheckOut = async (shoopingList) => {
         response => response.json()
     ).then(
         //data => console.log(data.init_point)
-        data => window.location.replace(data.init_point)
+        data => window.location.assign(data.init_point)
     );
 }
 

@@ -405,7 +405,7 @@ const makeCartContent = () => {
 }
 
 window.makeCartContent = () => makeCartContent();
-window.makeCardDeck = (filterValue) => makeCardDeck(filterValue);
+//window.makeCardDeck = (filterValue) => makeCardDeck(filterValue);
 
 
 
