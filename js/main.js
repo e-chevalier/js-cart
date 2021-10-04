@@ -213,8 +213,8 @@ const initCart = () => {
     }
     setCartCounter();
 
-    // AGREGAMOS EL EVENTO CLICK PARA REALIZAR EL CHECKOUT
-    document.getElementById('checkout').addEventListener('click', makeCheckOutMP);
+    // AGREGAMOS EL EVENTO CLICK PARA IR A REALIZAR EL CHECKOUT
+    document.getElementById('checkoutCart').addEventListener('click', () => location.href='/checkout.html' );
 }
 
 /**
@@ -394,7 +394,7 @@ const makeCartContent = () => {
     document.getElementById('subtotal').innerHTML = "Subtotal: $" + cart.subtotal;
     document.getElementById('envio').innerHTML = "Envio   : $" + cart.shipping;
 
-    cart.isEnable() ? document.getElementById('checkout').disabled = false : document.getElementById('checkout').disabled = true;
+    cart.isEnable() ? document.getElementById('checkoutCart').disabled = false : document.getElementById('checkoutCart').disabled = true;
 
     cartContent = makeCartContentTemplate( myShoopingList);
    
@@ -475,6 +475,9 @@ const makeCheckOutItems = () => {
         document.getElementById('checkOutTotal').innerHTML = "$"+ cart.total;
         document.getElementById('checkOutSubtotal').innerHTML = "$" + cart.subtotal;
         document.getElementById('checkOutEnvio').innerHTML = "$" + cart.shipping;
+        document.getElementById('checkoutButton').addEventListener('click', makeCheckOutMP);
+        cart.isEnable() ? document.getElementById('checkoutButton').classList.remove('disabled'): document.getElementById('checkoutButton').classList.add('disabled');
+
     }
 }
 
