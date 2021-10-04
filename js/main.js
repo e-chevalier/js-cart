@@ -8,7 +8,8 @@ import {
     makeDropDownList, 
     createNavLink, 
     createCarouselHomeItems,
-    createCarouselCatagoriesItems  } from './templates.js';
+    createCarouselCatagoriesItems,
+    makeCheckoutItemsTemplate } from './templates.js';
 
 import { makeCheckOut } from './mercadopago.js'
 
@@ -405,8 +406,6 @@ const makeCartContent = () => {
 }
 
 window.makeCartContent = () => makeCartContent();
-//window.makeCardDeck = (filterValue) => makeCardDeck(filterValue);
-
 
 
 /**
@@ -465,6 +464,20 @@ mediaQuery1024.addEventListener('change', handleCarouselCategories);
 mediaQuery768.addEventListener('change', handleCarouselCategories);
 
 
+const makeCheckOutItems = () => {
+    let checkOutContent = ``;
+    let myShoopingList = cart.shoopingList;
+
+    let node = document.getElementById('checkOutItems');
+    if (node) {
+        checkOutContent = makeCheckoutItemsTemplate(myShoopingList);
+        node.innerHTML = checkOutContent;
+        document.getElementById('checkOutTotal').innerHTML = "$"+ cart.total;
+        document.getElementById('checkOutSubtotal').innerHTML = "$" + cart.subtotal;
+        document.getElementById('checkOutEnvio').innerHTML = "$" + cart.shipping;
+    }
+}
+
 /**
  * ----------------------------------------
  * Función Main - Realizar compra.
@@ -480,6 +493,7 @@ const main = () => {
     initCart();
     makeCardDeck( getFilterValueByUrlParameter() );
     makeCartContent();
+    makeCheckOutItems();
     autoHideNavBar();
 }
 

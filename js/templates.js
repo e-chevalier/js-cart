@@ -78,8 +78,6 @@ const makeCartContentTemplate = (myShoopingList) => {
 
     copyMyShoopingList.forEach((prod, i) => {
 
-        let qty = prod.qty;
-        
         cartContent += `
             <div class="card mb-3">
                 <div class="row g-0">
@@ -91,8 +89,8 @@ const makeCartContentTemplate = (myShoopingList) => {
                             <h5 class="card-title">${prod.name}</h5>
                             <p class="card-text">
                                 <p>Precio por kg : $${prod.price}</p>
-                                <p>Cantidad solicitada: <span class="fw-bold">${qty} kg</span></p>
-                                <p><span class="fw-bold">Subtotal : $${qty * prod.price}</span></p>
+                                <p>Cantidad solicitada: <span class="fw-bold">${prod.qty} kg</span></p>
+                                <p><span class="fw-bold">Subtotal : $${prod.qty * prod.price}</span></p>
                             </p>
                         </div>
                     </div>
@@ -278,4 +276,74 @@ const createCarouselCatagoriesItems = (urlImg, categNames, carouselCategInnerId)
 }
 
 
-export { makeCardContentTemplate, makeCartContentTemplate, makeDropDownList, createNavLink, createCarouselHomeItems, createCarouselCatagoriesItems};
+/**
+ * ----------------------------------------
+ * Función para crear los items de checkout de manera dinámica.
+ * ----------------------------------------
+ */
+
+const makeCheckoutItemsTemplate = (myShoopingList) => {
+
+    let checkoutContent = ``;
+    const copyMyShoopingList = [...myShoopingList];
+    copyMyShoopingList.reverse();
+
+    checkoutContent += `
+        <ul class="list-group list-group-flush my-5 py-2 d-flex ">
+            <li class="list-group-item">
+                <div class="row g-0 mb-3">
+                    <div class="col-6 text-center h6"> Producto </div>
+                    <div class="col-2 h6"> Precio </div>
+                    <div class="col-2 h6"> Cant. </div>
+                    <div class="col-2 h6"> Total </div>
+                </div>
+            </li>`;
+
+    copyMyShoopingList.forEach((prod, i) => {
+
+        checkoutContent += `
+            <li class="list-group-item">
+                <div class="row g-0 mb-3 align-items-center">
+                    <div class="col-6 d-flex flex-column flex-md-row align-items-center justify-content-center">
+                        <img src="./assets/img/product/${prod.id}_100px.png" class="" alt="${prod.name}">
+                        <div>${prod.name}</div>
+                    </div>
+                                
+                    <div class="col-2"> $${prod.price}</div>
+                    <div class="col-2"> ${prod.qty} Kg</div>
+                    <div class="col-2"> $${prod.qty * prod.price}</div>
+                </div>
+            </li>`;
+    });
+
+    checkoutContent += `
+        <li class="list-group-item">
+            <div class="row g-0">
+                <div class="col-6 text-center h6"></div>
+                <div class="col-2 h6"></div>
+                <div class="col-2 h6"> Sub Total</div>
+                <div id="checkOutSubtotal" class="col-2 h6"> $12000</div>
+            </div>
+            <div class="row g-0">
+                <div class="col-6 text-center h6"></div>
+                <div class="col-2 h6"></div>
+                <div class="col-2 h6"> Envio</div>
+                <div id="checkOutEnvio" class="col-2 h6"> $300</div>
+            </div>
+            <div class="row g-0">
+                <div class="col-6 text-center h6"></div>
+                <div class="col-2 h6"></div>
+                <div class="col-2 h5"> TOTAL</div>
+                <div id="checkOutTotal" class="col-2 h5"> $12300</div>
+            </div>
+        </li>
+        <button id="checkoutButton" class="list-group-item list-group-item-action list-group-item-success disabled text-center h4" type="button">
+            INICIAR PAGO
+        </button>
+    </ul>`;
+
+    return checkoutContent;
+}
+
+
+export { makeCardContentTemplate, makeCartContentTemplate, makeDropDownList, createNavLink, createCarouselHomeItems, createCarouselCatagoriesItems, makeCheckoutItemsTemplate};
