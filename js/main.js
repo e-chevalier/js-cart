@@ -390,9 +390,12 @@ const makeCartContent = () => {
     let cartContent = ``;
     let myShoopingList = cart.shoopingList;
 
-    document.getElementById('total').innerHTML = "TOTAL $"+ cart.total;
-    document.getElementById('subtotal').innerHTML = "Subtotal: $" + cart.subtotal;
-    document.getElementById('envio').innerHTML = "Envio   : $" + cart.shipping;
+    document.getElementById('total').textContent = "TOTAL : $"+ cart.total;
+    document.getElementById('envio').textContent = "ENVIO : $" + cart.shipping;
+
+    let warning = cart.isEnable()? '': ` (Compra minima $${cart.minPurchase})`;
+    document.getElementById('subtotal').innerHTML = `SUBTOTAL: $${cart.subtotal} <small class="text-white">${warning}</small>`;
+
 
     cart.isEnable() ? document.getElementById('checkoutCart').disabled = false : document.getElementById('checkoutCart').disabled = true;
 

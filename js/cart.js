@@ -38,6 +38,10 @@ class Cart {
         return this._shipping;
     }
 
+    get minPurchase() {
+        return this._minPurchase;
+    }
+
     cartSize(){
 
         let count = 0;
