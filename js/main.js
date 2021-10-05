@@ -473,6 +473,14 @@ mediaQuery1024.addEventListener('change', handleCarouselCategories);
 mediaQuery768.addEventListener('change', handleCarouselCategories);
 
 
+
+/**
+ * ----------------------------------------
+ * Función para crear el contenido del checkout de manera dinámica.
+ *  
+ * ----------------------------------------
+ */
+
 const makeCheckOutItems = () => {
     let checkOutContent = ``;
     let myShoopingList = cart.shoopingList;
