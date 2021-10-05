@@ -192,8 +192,14 @@ const setAddButtonCardVisibility = (prodId) => {
 
 
 function makeCheckOutMP() {
-    console.log("Calling checkout")
-    makeCheckOut(cart.shoopingList);
+
+    if (cart.isEnable()) {
+        makeCheckOut(cart.shoopingList);
+    } else {
+        document.getElementById('checkoutButton').classList.add('disabled');
+        alert("No se cumple con la compra mínima.");
+        location.reload();
+    }
 }
 
 /**
@@ -480,7 +486,6 @@ const makeCheckOutItems = () => {
         document.getElementById('checkOutEnvio').innerHTML = "$" + cart.shipping;
         document.getElementById('checkoutButton').addEventListener('click', makeCheckOutMP);
         cart.isEnable() ? document.getElementById('checkoutButton').classList.remove('disabled'): document.getElementById('checkoutButton').classList.add('disabled');
-
     }
 }
 

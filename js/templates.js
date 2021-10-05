@@ -303,10 +303,16 @@ const makeCheckoutItemsTemplate = (myShoopingList) => {
 
         checkoutContent += `
             <li class="list-group-item">
-                <div class="row g-0 mb-3 align-items-center">
-                    <div class="col-6 d-flex flex-column flex-md-row align-items-center justify-content-center">
-                        <img src="./assets/img/product/${prod.id}_100px.png" class="" alt="${prod.name}">
-                        <div>${prod.name}</div>
+                <div class="row g-0 mb-3">
+                    <div class="col-6">
+                        <div class="row align-items-center justify-content-center flex-column flex-md-row">
+                            <div class="col-12 col-md-4 offset-md-2 text-center">
+                                <img src="./assets/img/product/${prod.id}_100px.png" class="" alt="${prod.name}">
+                            </div>
+                            <div class="col-12 col-md-6 text-center text-md-start txt-lg-start txt-xl-start">
+                                <div>${prod.name}</div>
+                            </div>
+                        </div>
                     </div>
                                 
                     <div class="col-2"> $${prod.price}</div>
