@@ -61,11 +61,14 @@ class Product {
         return this._qty;
     }
 
-    /**  Setters for private attributes **/
-
+    
     /*** Set the stock in qty units ***/
     reduceStock(qty){
         this._stock -= qty;
+    }
+
+    increaseStock(qty){
+        this._stock += qty;
     }
 
     stockPlusOne(){
@@ -75,6 +78,10 @@ class Product {
     stockMinusOne(){
         this._stock >= 1 ? this._stock -= 1 : console.log(`Stock de ${this._name}: ${this._stock}, menor a 1.`);
     }
+
+    setZeroQty(){
+        this._qty = 0;
+    }   
 
     qtyPlusOne(){
         this._qty += 1;
