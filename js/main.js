@@ -12,6 +12,7 @@ import {
     makeCheckoutItemsTemplate } from './templates.js';
 
 import { makeCheckOut } from './mercadopago.js'
+import jwtDecode from 'https://esm.run/jwt-decode';
 
 
 let cart = null;
@@ -20,18 +21,17 @@ let cart = null;
  * Google 
  */
 
- window.onSignIn = function onSignIn() {
-    const googleUser = gapi.auth2.getAuthInstance().currentUser.get();
-    var profile = googleUser.getBasicProfile();
-    console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
-    console.log('Name: ' + profile.getName());
-    console.log('Image URL: ' + profile.getImageUrl());
-    console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
-  
-    document.getElementById('userName').classList.toggle('d-none');
-    document.getElementById('userName').innerHTML = `<i class="far fa-user"><span class="px-3 roboto-regular">${profile.getName()}</span></i>`;
-    document.getElementById('signOut').classList.toggle('d-none'); 
-    document.getElementById('g-signin2').classList.toggle('d-none');
+ window.onSignIn = function onSignIn(response) {
+
+     const responsePayload = jwtDecode(response.credential);
+
+     console.log("ID: " + responsePayload.sub);
+     console.log('Full Name: ' + responsePayload.name);
+     console.log('Given Name: ' + responsePayload.given_name);
+     console.log('Family Name: ' + responsePayload.family_name);
+     console.log("Image URL: " + responsePayload.picture);
+     console.log("Email: " + responsePayload.email);
+
 
 }
 
