@@ -138,8 +138,9 @@ class Cart {
     empty(){
 
         this.shoopingList.forEach( item => {
-            catalogue.find(prod => prod.id === item.id).increaseStock(item.qty);
-            catalogue.find(prod => prod.id === item.id).setZeroQty();
+            let prod = catalogue.find(prod => prod.id === item.id);
+            prod.increaseStock(item.qty);
+            prod.setZeroQty();
         })
 
         this._shoopingList.length = 0;
