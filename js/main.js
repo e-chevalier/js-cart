@@ -12,40 +12,9 @@ import {
     makeCheckoutItemsTemplate } from './templates.js';
 
 import { makeCheckOut } from './mercadopago.js'
-import jwtDecode from 'https://esm.run/jwt-decode';
 
 
 let cart = null;
-
-/**
- * Google 
- */
-
- function onSignIn(response) {
-
-     const responsePayload = jwtDecode(response.credential);
-
-     console.log("ID: " + responsePayload.sub);
-     console.log('Full Name: ' + responsePayload.name);
-     console.log('Given Name: ' + responsePayload.given_name);
-     console.log('Family Name: ' + responsePayload.family_name);
-     console.log("Image URL: " + responsePayload.picture);
-     console.log("Email: " + responsePayload.email);
-}
-
-window.signOut = function signOut() {
-  var auth2 = gapi.auth2.getAuthInstance();
-  auth2.signOut().then(function () {
-    console.log('User signed out.');
-  });
-  document.getElementById('g-signin2').classList.toggle('d-none');
-  document.getElementById('userName').classList.toggle('d-none');
-  document.getElementById('signOut').classList.toggle('d-none');
-}
-
-
-
-
 
 /**
  * ----------------------------------------
