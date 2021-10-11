@@ -23,6 +23,13 @@ let user = {
     'ImageURL': '',
     'Email': ''};
 
+/**
+ * ----------------------------------------
+ * Función renderizar contenido del tad con ID "loginContainer"
+ * - No usuario --> Se muestra boton de login en google.
+ * - Usuario --> Muestra nombre y foto del mismo.
+ * ----------------------------------------
+ */
 
 const setloginContainer = () => {
 
@@ -36,7 +43,7 @@ const setloginContainer = () => {
             document.getElementById("loginContainer"),
             { theme: "outline", size: "large" }  // customization attributes
         );
-        //google.accounts.id.prompt(); // also display the One Tap dialog
+        
     } else {
         document.getElementById('loginContainer').innerHTML = `<img src="${user.ImageURL}" class="square-button mx-3" alt=""><span>${user.FullName}</span>
         <button id="signout_button" type="button" class="btn btn-outline-dark g_id_signout">Sign Out</button>`;
@@ -44,6 +51,12 @@ const setloginContainer = () => {
         button.addEventListener('click', signOut);
     }
 }
+
+/**
+ * ----------------------------------------
+ * Callback a la llamada de iniciación de sesion de google.
+ * ----------------------------------------
+ */
 
 function handleCredentialResponse(response) {
 
@@ -60,10 +73,15 @@ function handleCredentialResponse(response) {
 
     // SER USER ON LOCALSTORAGE
     localStorage.setItem('user', JSON.stringify(user));
-    //initCart();
     location.reload();
 
 }
+
+/**
+ * ----------------------------------------
+ * Función para deslogueo de la cuenta de google.
+ * ----------------------------------------
+ */
 
 const signOut = () => {
     google.accounts.id.disableAutoSelect();
@@ -72,6 +90,12 @@ const signOut = () => {
     location.reload();
 }
 
+
+/**
+ * ----------------------------------------
+ * Función que cargar el user desde el locastorage y llama al seteo del tag de login.
+ * ----------------------------------------
+ */
 const login = () => {
 
     // SET USER IF EXIST ON LOCALSTORAGE
@@ -162,7 +186,7 @@ const setCartCounter = () => {
 
 
 /**
- * 
+ * Función para realizar animación sobre botones + y - de los cards.
  * @param {*} id 
  */
  const elementWithAnimation = (id, visibility) => {
@@ -230,6 +254,12 @@ const setAddButtonCardVisibility = (prodId) => {
     }
 }
 
+
+/**
+ * ----------------------------------------
+ * Función para realizar el checkout por MercadoPago.
+ * ----------------------------------------
+ */
 
 function makeCheckOutMP() {
 
@@ -491,7 +521,7 @@ window.makeCartContent = () => makeCartContent();
 
 /**
  * ----------------------------------------
- * Evento para autohide del navbar
+ * Función para agregar el Evento para autohide del navbar
  * ----------------------------------------
  */
 
@@ -586,7 +616,6 @@ const main = () => {
     makeCheckOutItems();
     autoHideNavBar();
     login();
-    
 }
 
 main();
