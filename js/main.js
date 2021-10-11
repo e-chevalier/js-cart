@@ -11,10 +11,83 @@ import {
     createCarouselCatagoriesItems,
     makeCheckoutItemsTemplate } from './templates.js';
 
-import { makeCheckOut } from './mercadopago.js'
-
+import { makeCheckOut } from './mercadopago.js';
+import jwtDecode from '../js/jwt-decode.js';
 
 let cart = null;
+let user = {
+    'ID':'',
+    'FullName': '',
+    'GivenName': '',
+    'FamilyName': '',
+    'ImageURL': '',
+    'Email': ''};
+
+
+const setloginContainer = () => {
+
+    if (user.ID === ''){
+        google.accounts.id.initialize({
+            client_id: "221295695663-k26dc2qet8vg6eslb328i20l84dltn5b.apps.googleusercontent.com",
+            auto_select: "true",
+            callback: handleCredentialResponse
+        });
+        google.accounts.id.renderButton(
+            document.getElementById("loginContainer"),
+            { theme: "outline", size: "large" }  // customization attributes
+        );
+        //google.accounts.id.prompt(); // also display the One Tap dialog
+    } else {
+        document.getElementById('loginContainer').innerHTML = `<img src="${user.ImageURL}" class="square-button mx-3" alt=""><span>${user.FullName}</span>
+        <button id="signout_button" type="button" class="btn btn-outline-dark g_id_signout">Sign Out</button>`;
+        const button = document.getElementById('signout_button');
+        button.addEventListener('click', signOut);
+    }
+}
+
+function handleCredentialResponse(response) {
+
+    const responsePayload = jwtDecode(response.credential);
+
+    user = {
+        'ID':responsePayload.sub,
+        'FullName':  responsePayload.name,
+        'GivenName': responsePayload.given_name,
+        'FamilyName': responsePayload.family_name,
+        'ImageURL': responsePayload.picture,
+        'Email': responsePayload.email
+    }
+
+    // SER USER ON LOCALSTORAGE
+    localStorage.setItem('user', JSON.stringify(user));
+    //initCart();
+    location.reload();
+
+}
+
+const signOut = () => {
+    google.accounts.id.disableAutoSelect();
+    localStorage.removeItem('user');
+    user = {'ID':'', 'FullName': '', 'GivenName': '', 'FamilyName': '', 'ImageURL': '', 'Email': ''};
+    location.reload();
+}
+
+const login = () => {
+
+    // SET USER IF EXIST ON LOCALSTORAGE
+    if ( localStorage.getItem('user') ) { //USER EXIST ON LOCALSTORAGE
+        let user_localStorage = JSON.parse(localStorage.getItem('user'));
+        user = user_localStorage;
+        initCart();
+        makeCardDeck( getFilterValueByUrlParameter() );
+    }
+    
+    setloginContainer(); // SHOW BUTTON 
+    
+}
+
+
+
 
 /**
  * ----------------------------------------
@@ -24,7 +97,7 @@ let cart = null;
 
 const infoCart = () => {
 
-    const myShoopingList = cart.shoopingList;
+    let myShoopingList = cart.shoopingList;
   
     myShoopingList.forEach( art => {
         console.log(`+ ${art.name} - ${art.qty}Kg -- $${art.qty * art.price} -`);
@@ -48,8 +121,8 @@ const infoCart = () => {
  * ----------------------------------------
  */
 
-const getCartFromLocalStorage = () => {
-    let localStorageCart = JSON.parse(localStorage.getItem('cart'));
+const getCartFromLocalStorage = (cart_id) => {
+    let localStorageCart = JSON.parse(localStorage.getItem(cart_id));
     let newShoopoingList = localStorageCart.shoopingList.map(prod => new Product(prod));
     localStorageCart.shoopingList = newShoopoingList;
     let newcart = new Cart(localStorageCart);
@@ -124,17 +197,17 @@ const setStockCounter = (prodId) => {
         // stock badge is red and stock > 0
         if (actualStock > 0 && document.getElementById(id).classList.contains('bg-red')) {
             document.getElementById(id).classList.replace('bg-red', 'bg-green');
-            //document.getElementById('addButton-'+prodId).style.visibility = "visible";
-            //$('#img-'+prodId).css('filter', 'grayscale(0)');
-            elementWithAnimation( prodId, 'visible');                 
+            document.getElementById('addButton-'+prodId).style.visibility = "visible";
+            $('#img-'+prodId).css('filter', 'grayscale(0)');
+            //elementWithAnimation( prodId, 'visible');                 
         }
 
         // stock is 0 and badge is gray 
         if (actualStock == 0 && document.getElementById(id).classList.contains('bg-green')) {
             document.getElementById(id).classList.replace('bg-green', 'bg-red');
-            //document.getElementById('addButton-'+prodId).style.visibility = "hidden";
-            //$('#img-'+prodId).css('filter', 'grayscale(1)');
-            elementWithAnimation( prodId, 'hidden');
+            document.getElementById('addButton-'+prodId).style.visibility = "hidden";
+            $('#img-'+prodId).css('filter', 'grayscale(1)');
+            //elementWithAnimation( prodId, 'hidden');
         }
     }
 }
@@ -177,16 +250,47 @@ function makeCheckOutMP() {
 
 const initCart = () => {
 
-    if (localStorage.getItem('cart')) { // Found in localStorage
-        cart = getCartFromLocalStorage(); // SET GLOBAL CART
-        updateRemainingStock();
-    } else { // Not Found in localStorage
+    if (!(localStorage.getItem('cart')) && user.ID === '' && !(localStorage.getItem('user')) ) { // NOT GENERIC CART AND USER NEVER LOGGED IN YET
         cart = new Cart({});
         localStorage.setItem('cart', JSON.stringify(cart.stringify()));
     }
+
+    if (localStorage.getItem('cart') && user.ID === '' && !(localStorage.getItem('user')) ) {  // GENERIC CART AND USER NEVER LOGGED IN YET
+        cart = getCartFromLocalStorage('cart'); // SET GLOBAL CART
+        updateRemainingStock();
+    }
+
+    if (localStorage.getItem('cart') && localStorage.getItem('user')  ) {  // GENERIC CART AND USER LOGGED IN
+        
+        let userID  = JSON.parse(localStorage.getItem('user')).ID;
+
+        if(localStorage.getItem('cart'+userID)) {  // USER HAVE CART
+            
+            if(cart) { emptyCart();}; // EMPTY GENERIC CART
+            localStorage.removeItem('cart');
+            cart = getCartFromLocalStorage('cart'+userID); // SET USER CART AS GLOBAL CART
+            updateRemainingStock();
+
+        } else { // USER HAVE NOT CART
+            
+            if (cart == null ) {
+                cart = getCartFromLocalStorage('cart'); // SET GLOBAL CART
+                updateRemainingStock();
+            }
+            localStorage.removeItem('cart');
+            localStorage.setItem('cart'+userID, JSON.stringify(cart.stringify())); //CREATE COPY FORM GENERIC
+        }
+    }
+
+    if (!(localStorage.getItem('cart')) && localStorage.getItem('user') &&  cart == null ) {  // NOT GENERIC CART AND USER LOGGED IN
+        let userID  = JSON.parse(localStorage.getItem('user')).ID;
+        cart = getCartFromLocalStorage('cart'+userID); // SET USER CART AS GLOBAL CART
+        updateRemainingStock();
+    }
+
     setCartCounter();
 
-    // AGREGAMOS EL EVENTO CLICK PARA IR A REALIZAR EL CHECKOUT
+    // AGREGAMOS EL EVENTO CLICK PARA IR A REALIZAR EL CHECKOUT 
     document.getElementById('checkoutCart').addEventListener('click', () => location.href='/checkout.html' );
 }
 
@@ -199,13 +303,13 @@ const initCart = () => {
 window.addToCart = function addToCart(prodId) {
 
     if( cart.addItem(prodId) ) { // there is stock
-        localStorage.setItem('cart', JSON.stringify(cart.stringify()));
+        localStorage.setItem('cart'+user.ID, JSON.stringify(cart.stringify()));
         setCartCounter();
         setStockCounter(prodId);
         updateProdQty(prodId);
         setAutoOpenCart(prodId);
         makeCartContent();
-        infoCart();
+        //infoCart();
     } else {
         alert("NO HAY STOCK DE ESE PRODUCTO");  
     }
@@ -220,13 +324,13 @@ window.addToCart = function addToCart(prodId) {
 
 window.takeOutOfCart = function takeOutOfCart(prodId) {
     cart.dropItem(prodId);
-    localStorage.setItem('cart', JSON.stringify(cart.stringify()));
+    localStorage.setItem('cart'+user.ID, JSON.stringify(cart.stringify()));
     setCartCounter();
     setStockCounter(prodId);
     updateProdQty(prodId);
     setAutoOpenCart(prodId);
     makeCartContent();
-    infoCart();
+    //infoCart();
 }
 
 /**
@@ -237,7 +341,7 @@ window.takeOutOfCart = function takeOutOfCart(prodId) {
 
 window.emptyCart = function emptyCart() {
     cart.empty();
-    localStorage.setItem('cart', JSON.stringify(cart.stringify()));
+    localStorage.setItem('cart'+user.ID, JSON.stringify(cart.stringify()));
     setCartCounter();
     catalogue.forEach(prod => {
         setStockCounter(prod.id); 
@@ -245,7 +349,7 @@ window.emptyCart = function emptyCart() {
         setAutoOpenCart(prod.id);
     });
     makeCartContent();
-    infoCart();
+    //infoCart();
     
 }
 
@@ -360,6 +464,7 @@ const makeCardDeck = (filterValue) => {
 
 
 const makeCartContent = () => {
+
     let cartContent = ``;
     let myShoopingList = cart.shoopingList;
 
@@ -372,7 +477,7 @@ const makeCartContent = () => {
 
     cart.isEnable() ? document.getElementById('checkoutCart').disabled = false : document.getElementById('checkoutCart').disabled = true;
 
-    cartContent = makeCartContentTemplate( myShoopingList);
+    cartContent = makeCartContentTemplate(myShoopingList);
    
     document.getElementById('cartContent').innerHTML = cartContent;
 
@@ -471,7 +576,6 @@ const makeCheckOutItems = () => {
  */
 
 const main = () => {
-
     makeDropDownList();
     createNavLink('contact', 'Contacto');
     createCarouselHomeItems('./assets/img/banner', 5, 'homeCarouselInner');
@@ -481,6 +585,8 @@ const main = () => {
     makeCartContent();
     makeCheckOutItems();
     autoHideNavBar();
+    login();
+    
 }
 
 main();

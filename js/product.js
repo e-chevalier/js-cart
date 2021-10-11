@@ -63,12 +63,12 @@ class Product {
 
     
     /*** Set the stock in qty units ***/
-    reduceStock(qty){
-        this._stock -= qty;
+    reduceStock(value){
+        this._stock -= value;
     }
 
-    increaseStock(qty){
-        this._stock += qty;
+    increaseStock(value){
+        this._stock += value;
     }
 
     stockPlusOne(){

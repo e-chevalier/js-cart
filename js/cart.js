@@ -53,8 +53,10 @@ class Cart {
     addItem(id){
         let status = false;
         let prod = this.findProdById(id, catalogue);
+           
         if(prod.stock > 0) { // there is stock
-            catalogue.find(prod => prod.id === id).stockMinusOne(); // reduces stock by one unit
+            
+            catalogue.find(prod => prod.id === id).stockMinusOne(); // reduces stock by one unit on catalogue.
            
             let idx = this._shoopingList.findIndex(prod => prod.id === id);
             if( idx >= 0) { // Prod Found on Cart
@@ -77,7 +79,7 @@ class Cart {
     dropItem(id){
         let idx = this._shoopingList.findIndex(prod => prod.id === id);
         if( idx >= 0) { // prod found
-            catalogue.find(prod => prod.id === id).stockPlusOne(); // Increase stock by one unit
+            catalogue.find(prod => prod.id === id).stockPlusOne(); // Increase stock by one unit on catalogue.
 
             if (this._shoopingList[idx].qty > 1) { // More than One
                 this._shoopingList[idx].qtyMinusOne();

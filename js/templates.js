@@ -78,6 +78,8 @@ const makeCartContentTemplate = (myShoopingList) => {
 
     copyMyShoopingList.forEach((prod, i) => {
 
+        let prodStock = catalogue.find(elem => elem.id === prod.id).stock;
+
         cartContent += `
             <div class="card mb-3">
                 <div class="row g-0">
@@ -102,7 +104,7 @@ const makeCartContentTemplate = (myShoopingList) => {
                         onclick="takeOutOfCart('${prod.id}');return false;">
                             <i class="fas fa-minus"></i>
                         </button>
-                        <div> <span class="badge bg-light text-success fs-6">Stock ${prod.stock} Kg</span>
+                        <div> <span class="badge bg-light text-success fs-6">Stock ${prodStock} Kg</span>
                         </div>
                         <button id="addButtonCart-${prod.id}" type="button" class="btn btn-outline-success rounded-circle border-0 square-button" 
                         onclick="addToCart('${prod.id}');return false;">
